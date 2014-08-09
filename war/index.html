@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+	<link rel="stylesheet" href="themes/test.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+
 
   <script src="main.js"></script>
 </head>
@@ -18,15 +21,35 @@
 
 	<div data-role="header" >
 		<h1><script>document.write(getUrlParameter("Name"))</script>
-		  <img src='JumpSchoolLogo.jpg'/>
+		  &nbsp;<img src='JumpSchoolLogo.jpg'/>
 		</h1>
 	</div>
 
 	<div role="main" class="ui-content">
-	  <script>
-	  document.write(getUrlParameter("Name"));
-	    
-	  </script>
+
+      <div class="ui-field-contain" >
+          <label for="text-basic">Vision:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Vision" value="">
+   
+          <label for="text-basic">Main Feature:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Main Feature" value="">
+  
+          <label for="text-basic">Persona:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Persona" value="">
+  
+          <label for="text-basic">Ecosystem:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Ecosystem Map (Optional)" value="">
+  
+          <label for="text-basic">BM Canvas:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Business Model Canvas" value="">
+  
+          <label for="text-basic">Landing Page:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Landing Page" value="">
+
+          <label for="text-basic">MVP:</label>
+          <input type="text" name="text-basic" id="text-basic" placeholder="Minimum Viable Product" value="">
+      </div>
+
 
 	</div>
 
