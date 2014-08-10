@@ -1,30 +1,34 @@
+function saveRoadmap(value) {
+  alert(value);
+}
+
 $(document).on("pageinit", function(event) {
 
 	$("#vision").change(function() {
-		alert('vision')
+	  saveRoadmap($("#vision").val());
 	});
 	
 	$("#mainfeature").change(function() {
-		alert('mainfeature')
+		saveRoadmap($("#mainfeature").val());
 	});
 	
 	$("#persona").change(function() {
-		alert('persona')
+		saveRoadmap($("#persona").val());
 	});
 	
 	$("#ecosystem").change(function() {
-		alert('ecosystem')
+		saveRoadmap($("#ecosystem").val());
 	});
 	
   $("#bmcanvas").change(function() {
-		alert('mainfeature')
+		saveRoadmap($("#bmcanvas").val());
 	});
 	
 	$("#landingpage").change(function() {
-		alert('landingpage')
+		saveRoadmap($("#landingpage").val());
 	});
 	
 	$("#mvp").change(function() {
-		alert('mvp')
+		saveRoadmap($("#mvp").val());
 	});	
 });
