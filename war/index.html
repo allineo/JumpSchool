@@ -12,41 +12,47 @@
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 
 
-  <script src="main.js"></script>
-  <script src="saveroadmap.js"></script>
+  <script src="utilities.js"></script>
+  <script src="roadmap.js"></script>
 </head>
 
 <body>
 
 <div data-role="page" >
 
-		<h1><img src='JumpSchoolLogo.jpg'/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<script>document.write(getUrlParameter("Name"))</script>
-		</h1>
+		<img src='JumpSchoolLogo.jpg'/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<b><script>document.write(getUrlParameter("Name"))</script></b>
+		
 
 	<div role="main" class="ui-content">
 
       <div class="ui-field-contain" >
           <label for="vision">Vision:</label>
-          <input type="text" name="vision" id="vision" placeholder="Vision" value="">
+          <input type="text" name="vision" id="vision" placeholder="Vision" value="" />
    
           <label for="mainfeature">Main Feature:</label>
-          <input type="text" name="mainfeature" id="mainfeature" placeholder="Main Feature" value="">
+          <input type="text" name="mainfeature" id="mainfeature" placeholder="Main Feature" value="" />
   
           <label for="persona">Persona:</label>
-          <input type="text" name="persona" id="persona" placeholder="Persona" value="">
+          <input type="text" name="persona" id="persona" placeholder="Persona" value="" />
   
           <label for="ecosystem">Ecosystem:</label>
-          <input type="text" name="ecosystem" id="ecosystem" placeholder="Ecosystem Map (Optional)" value="">
+          <input type="text" name="ecosystem" id="ecosystem" placeholder="Ecosystem Map (Optional)" value="" />
   
           <label for="bmcanvas">BM Canvas:</label>
-          <input type="text" name="bmcanvas" id="bmcanvas" placeholder="Business Model Canvas" value="">
+          <input type="text" name="bmcanvas" id="bmcanvas" placeholder="Business Model Canvas" value="" />
   
           <label for="landingpage">Landing Page:</label>
-          <input type="text" name="landingpage" id="landingpage" placeholder="Landing Page" value="">
+          <input type="text" name="landingpage" id="landingpage" placeholder="Landing Page" value="" />
+
+          <label for="maetrics">Metrics:</label>
+          <input type="text" name="metrics" id="metrics" placeholder="Metrics" value="" />
 
           <label for="mvp">MVP:</label>
-          <input type="text" name="mvp" id="mvp" placeholder="Minimum Viable Product" value="">
+          <input type="text" name="mvp" id="mvp" placeholder="Minimum Viable Product" value="" />
+          
+          <label for="salescopy">Sales Copy:</label>
+          <input type="text" name="salescopy" id="salescopy" placeholder="Sales Copy" value="" />
       </div>
 
 

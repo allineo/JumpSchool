@@ -4,5 +4,23 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  
+
+    <servlet>
+		<servlet-name>getroadmap</servlet-name>
+		<servlet-class>co.jumpschool.GetRoadmapServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getroadmap</servlet-name>
+		<url-pattern>/getroadmap</url-pattern>
+	</servlet-mapping>
+    
+    <servlet>
+		<servlet-name>saveroadmap</servlet-name>
+		<servlet-class>co.jumpschool.SaveRoadmapServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>saveroadmap</servlet-name>
+		<url-pattern>/saveroadmap</url-pattern>
+	</servlet-mapping>
+    
 </web-app>
