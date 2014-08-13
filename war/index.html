@@ -4,103 +4,20 @@
 <head>
 	<title>Jump School Roadmap</title>
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
-	<link rel="stylesheet" href="themes/test.min.css" />
-	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-
-
-  <script src="javascript/utilities.js"></script>
-  <script src="javascript/roadmap.js"></script>
-  <script src="javascript/initialization.js"></script>
+	<script src="javascript/utilities.js"></script>
 </head>
 
 <body>
 
-<div data-role="page" >
-
-    <div data-role="header"> 
-	    <h1>Roadmap</h1> 
-    </div> 
-
-		<img src='JumpSchoolLogo.jpg'/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<b><script>document.write(getUrlParameter("Name"))</script></b>
-		
-
-	<div role="main" class="ui-content">
-
-     
-     <div div data-role="fieldcontain" style="border-width: 0;" >  
-          <label for="inputVision" style="background-color:lightgray"><a href="#popupVision" data-rel="popup" data-transition="pop" title="Learn more">Vision</a>:</label>
-          <textarea  name="inputVision" id="inputVision" placeholder="Vision" value="" rows=1 ></textarea>
-          <div id="visionValue"></div>
-    </div>
-
-    <div data-role="fieldcontain" style="border-width: 0;">
-          <label for="maineFeatureInput" style="background-color:lightgray"><a href="#popupMainFeature" data-rel="popup" data-transition="pop" title="Learn more">Main Feature</a>:</label>
-          <textarea rows=1 name="mainFeatureInput" id="mainFeatureInput" placeholder="Main Feature" value="" ></textarea>
-          <div id="mainFeatureValue"></div>
-    </div>
-    
-    <div data-role="fieldcontain" style="border-width: 0;">
-          <label for="personaInput" style="background-color:lightgray"><a href="#popupPersona" data-rel="popup" data-transition="pop" title="Learn more">Persona</a>:</label>
-          <textarea rows=1 name="personaInput" id="personaInput" placeholder="Persona" value="" ></textarea>
-          <div id="personaValue"></div>
-    </div>
+<script>
+  if(getUrlParameter("Name") == null || getUrlParameter("Name") == ""){
+    window.location.href = "./getname.html";
+  } else {
+    window.location.href = "./roadmap.html?Name=" + getUrlParameter("Name");
+  }
   
-    <div data-role="fieldcontain" style="border-width: 0;">  
-          <label for="ecosystemInput" style="background-color:lightgray"><a href="#popupEcosystem" data-rel="popup" data-transition="pop" title="Learn more">Ecosystem</a>:</label>
-          <textarea name="ecosystemInput" id="ecosystemInput" placeholder="Ecosystem Map (Optional)" value="" ></textarea>
-          <div id="ecosystemValue"></div>
-    </div>
-    
-    <div data-role="fieldcontain" style="border-width: 0;"> 
-          <label for="bmcanvasInput" style="background-color:lightgray"><a href="#popupBMCanvas" data-rel="popup" data-transition="pop" title="Learn more">BM Canvas</a>:</label>
-          <textarea name="bmcanvasInput" id="bmcanvasInput" placeholder="Business Model Canvas" value="" ></textarea>
-          <div id="bmcanvasValue"></div>
-    </div>
   
-    <div data-role="fieldcontain" style="border-width: 0;"> 
-          <label for="landingpageInput" style="background-color:lightgray"><a href="#popupLandingPage" data-rel="popup" data-transition="pop" title="Learn more">Landing Page</a>:</label>
-          <textarea name="landingpageInput" id="landingpageInput" placeholder="Landing Page" value="" ></textarea>
-          <div id="landingpageValue"></div>
-    </div>
-
-    <div data-role="fieldcontain" style="border-width: 0;"> 
-          <label for="maetricsInput" style="background-color:lightgray"><a href="#popupMetrics" data-rel="popup" data-transition="pop" title="Learn more">Metrics</a>:</label>
-          <textarea name="metricsInput" id="metricsInput" placeholder="Metrics" value="" ></textarea>
-          <div id="metricsValue"></div>
-    </div>
-
-    <div data-role="fieldcontain" style="border-width: 0;"> 
-          <label for="mvpInput" style="background-color:lightgray"><a href="#popupMvp" data-rel="popup" data-transition="pop" title="Learn more">MVP</a>:</label>
-          <textarea name="mvpInput" id="mvpInput" placeholder="Minimum Viable Product" value="" ></textarea>
-          <div id="mvpValue"></div>
-    </div>
-          
-    <div data-role="fieldcontain" style="border-width: 0;"> 
-          <label for="salescopyInput" style="background-color:lightgray"><a href="#popupSalesCopy" data-rel="popup" data-transition="pop" title="Learn more">Sales Copy</a>:</label>
-          <textarea name="salescopyInput" id="salescopyInput" placeholder="Sales Copy" value="" ></textarea>
-          <div id="salescopyValue"></div>
-    </div>
-
-	</div>
-
-  <div data-role="popup" id="popupVision" name="popupVision"></div>
-  <div data-role="popup" id="popupMainFeature" name="popupMainFeature"></div>
-  <div data-role="popup" id="popupPersona" name="popupPersona"></div>
-  <div data-role="popup" id="popupEcosystem" name="popupEcosystem"></div>
-  <div data-role="popup" id="popupBMCanvas" name="popupBMCanvas"></div>    
-  <div data-role="popup" id="popupLandingPage" name="popupLandingPage"></div>
-  <div data-role="popup" id="popupMetrics" name="popupMetrics"></div>  
-  <div data-role="popup" id="popupMvp" name="popupMvp"></div>
-  <div data-role="popup" id="popupSalesCopy" name="popupSalesCopy"></div>  
-
-</div>
-
+</script>
   
 </body>
 </html>
-

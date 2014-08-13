@@ -5,6 +5,7 @@ $(document).on(
 			$("#visionValue").click(function() {
 				$("#visionValue").hide();
 				$("#inputVision").show();
+				$("#inputVision").focus();
 			});
 			$("#inputVision").change(function() {
 				saveRoadmap();
@@ -25,6 +26,7 @@ $(document).on(
 			$("#mainFeatureValue").click(function() {
 				$("#mainFeatureValue").hide();
 				$("#mainFeatureInput").show();
+				$("#mainFeatureInput").focus();
 			});
 			$("#mainFeatureInput").change(function() {
 				saveRoadmap();
@@ -46,6 +48,7 @@ $(document).on(
 			$("#personaValue").click(function() {
 				$("#personaValue").hide();
 				$("#personaInput").show();
+				$("#personaInput").focus();
 			});
 			$("#personaInput").change(function() {
 				saveRoadmap();
@@ -66,6 +69,7 @@ $(document).on(
 			$("#ecosystemValue").click(function() {
 				$("#ecosystemValue").hide();
 				$("#ecosystemInput").show();
+				$("#ecosystemInput").focus();
 			});
 			$("#ecosystemInput").change(function() {
 				saveRoadmap();
@@ -86,6 +90,7 @@ $(document).on(
 			$("#bmcanvasValue").click(function() {
 				$("#bmcanvasValue").hide();
 				$("#bmcanvasInput").show();
+				$("#bmcanvasInput").focus();
 			});
 			$("#bmcanvasInput").change(function() {
 				saveRoadmap();
@@ -106,6 +111,7 @@ $(document).on(
 			$("#landingpageValue").click(function() {
 				$("#landingpageValue").hide();
 				$("#landingpageInput").show();
+				$("#landingpageInput").focus();
 			});
 			$("#landingpageInput").change(function() {
 				saveRoadmap();
@@ -127,6 +133,7 @@ $(document).on(
 			$("#metricsValue").click(function() {
 				$("#metricsValue").hide();
 				$("#metricsInput").show();
+				$("#metricsInput").focus();
 			});
 			$("#metricsInput").change(function() {
 				saveRoadmap();
@@ -147,6 +154,7 @@ $(document).on(
 			$("#mvpValue").click(function() {
 				$("#mvpValue").hide();
 				$("#mvpInput").show();
+				$("#mvpInput").focus();
 			});
 			$("#mvpInput").change(function() {
 				saveRoadmap();
@@ -166,6 +174,7 @@ $(document).on(
 			$("#salescopyValue").click(function() {
 				$("#salescopyValue").hide();
 				$("#salescopyInput").show();
+				$("#salescopyInput").focus();
 			});
 			$("#salescopyInput").change(function() {
 				saveRoadmap();
