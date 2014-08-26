@@ -7,3 +7,4 @@ function getUrlParameter(urlParameterName) {
 		return decodeURIComponent(urlParameterName[1]);
 	}
 }
+

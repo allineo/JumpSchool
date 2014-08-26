@@ -6,6 +6,25 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
     <servlet>
+		<servlet-name>getmetrics</servlet-name>
+		<servlet-class>co.jumpschool.GetMetricsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getmetrics</servlet-name>
+		<url-pattern>/getmetrics</url-pattern>
+	</servlet-mapping>
+    
+    <servlet>
+		<servlet-name>savemetrics</servlet-name>
+		<servlet-class>co.jumpschool.SaveMetricsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>savemetrics</servlet-name>
+		<url-pattern>/savemetrics</url-pattern>
+	</servlet-mapping>
+    
+    
+    <servlet>
 		<servlet-name>getroadmap</servlet-name>
 		<servlet-class>co.jumpschool.GetRoadmapServlet</servlet-class>
 	</servlet>
