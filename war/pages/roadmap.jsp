@@ -1,28 +1,66 @@
 
-<div div data-role="fieldcontain" style="border-width: 0;">
+<%@ page
+	import="com.google.appengine.api.blobstore.BlobstoreServiceFactory"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService"%>
+
+<%
+	BlobstoreService blobstoreService = BlobstoreServiceFactory
+			.getBlobstoreService();
+%>
+
+
+<div data-role="fieldcontain" style="border-width: 0;">
 	<label for="inputVision" style="background-color: lightgray"><a
 		href="#popupVision" data-rel="popup" data-transition="pop"
 		title="Learn more">Big Vision</a>:</label>
 	<textarea name="inputVision" id="inputVision"
-		placeholder="Big Vision (Your F6S account URL)" value="" rows=1></textarea>
+		placeholder="Big Vision (Your F6S account URL)" value="" rows=1
+		class="ui-corner-all"></textarea>
 	<div id="visionValue"></div>
 </div>
 
 <div data-role="fieldcontain" style="border-width: 0;">
+
 	<label for="maineFeatureInput" style="background-color: lightgray"><a
 		href="#popupMainFeature" data-rel="popup" data-transition="pop"
 		title="Learn more">Main Feature</a>:</label>
-	<textarea rows=1 name="mainFeatureInput" id="mainFeatureInput"
-		placeholder="Your Main Feature Sketching" value=""></textarea>
+
+	<div id="mainFeatureField">
+		<textarea rows=1 name="mainFeatureInput" id="mainFeatureInput"
+			placeholder="Your Main Feature Sketching" value=""></textarea>
+		<form method="post"
+			action='<%=blobstoreService.createUploadUrl("/upload")%>'
+			target=_blank enctype="multipart/form-data" data-ajax="false">
+			<input type=hidden name=name id=mainFeatureImageName
+				value= /> 
+				<input type=hidden name=fieldName id=fieldName value=mainFeatureImage />
+				<input name="imageField" type="file" id="imageField"
+				accept="image/*" capture /> <input type="submit" value="Send"
+				name="submit" class="btn">
+		</form>
+	</div>
 	<div id="mainFeatureValue"></div>
+
 </div>
+
 
 <div data-role="fieldcontain" style="border-width: 0;">
 	<label for="personaInput" style="background-color: lightgray"><a
 		href="#popupPersona" data-rel="popup" data-transition="pop"
 		title="Learn more">Persona/Empathy Map</a>:</label>
-	<textarea rows=1 name="personaInput" id="personaInput"
-		placeholder="Your Persona/Empathy Map URL" value=""></textarea>
+
+	<div id="personaField">
+		<textarea rows=1 name="personaInput" id="personaInput"
+			placeholder="Your Persona/Empathy Map URL" value=""></textarea>
+		<form method="post"
+			action='<%=blobstoreService.createUploadUrl("/upload")%>'
+			target=_blank enctype="multipart/form-data" data-ajax="false">
+			<input type=hidden name=name id=personaImageName value= />
+			<input type=hidden name=fieldName id=fieldName value=personaImage />
+			<input name="imageField" type="file" id="imageField" accept="image/*" capture />
+			<input type="submit" value="Send" name="submit" class="btn">
+		</form>
+	</div>
 	<div id="personaValue"></div>
 </div>
 
@@ -74,6 +112,13 @@
 
 
 <script>
+	ga('send', 'screenview', {
+		'screenName' : 'Roadmap'
+	});
+
+	$("#mainFeatureImageName").val(getUrlParameter("Name"));
+	$("#personaImageName").val(getUrlParameter("Name"));
+
 	$("#visionValue").click(function() {
 		$("#visionValue").hide();
 		$("#inputVision").show();
@@ -99,28 +144,30 @@
 
 	$("#mainFeatureValue").click(function() {
 		$("#mainFeatureValue").hide();
-		$("#mainFeatureInput").show();
+		$("#mainFeatureField").show();
 		$("#mainFeatureInput").focus();
 	});
 	$("#mainFeatureInput").change(function() {
 		saveRoadmap();
 	});
-	$("#mainFeatureInput").blur(
+	$("#mainFeatureField").blur(
 			function() {
 				if ($('#mainFeatureInput').val() != null
 						&& $('#mainFeatureInput').val() != "") {
 					$("#mainFeatureValue").html(
-							"<blockquote><font size=1><a href='" + $('#mainFeatureInput').val()
+							"<blockquote><font size=1><a href='"
+									+ $('#mainFeatureInput').val()
 									+ "' target='_blank'>"
-									+ $('#mainFeatureInput').val() + "</a></font></blockquote>");
-					$('#mainFeatureInput').hide();
+									+ $('#mainFeatureInput').val()
+									+ "</a></font></blockquote>");
+					$('#mainFeatureField').hide();
 					$('#mainFeatureValue').show();
 				}
 			});
 
 	$("#personaValue").click(function() {
 		$("#personaValue").hide();
-		$("#personaInput").show();
+		$("#personaField").show();
 		$("#personaInput").focus();
 	});
 	$("#personaInput").change(function() {
@@ -131,10 +178,12 @@
 				if ($('#personaInput').val() != null
 						&& $('#personaInput').val() != "") {
 					$("#personaValue").html(
-							"<blockquote><font size=1><a href='" + $('#personaInput').val()
+							"<blockquote><font size=1><a href='"
+									+ $('#personaInput').val()
 									+ "' target='_blank'>"
-									+ $('#personaInput').val() + "</a></font></blockquote>");
-					$('#personaInput').hide();
+									+ $('#personaInput').val()
+									+ "</a></font></blockquote>");
+					$('#personaField').hide();
 					$('#personaValue').show();
 				}
 			});
@@ -152,9 +201,11 @@
 				if ($('#bmcanvasInput').val() != null
 						&& $('#bmcanvasInput').val() != "") {
 					$("#bmcanvasValue").html(
-							"<blockquote><font size=1><a href='" + $('#bmcanvasInput').val()
+							"<blockquote><font size=1><a href='"
+									+ $('#bmcanvasInput').val()
 									+ "' target='_blank'>"
-									+ $('#bmcanvasInput').val() + "</a></font></blockquote>");
+									+ $('#bmcanvasInput').val()
+									+ "</a></font></blockquote>");
 					$('#bmcanvasInput').hide();
 					$('#bmcanvasValue').show();
 				}
@@ -173,9 +224,11 @@
 				if ($('#landingpageInput').val() != null
 						&& $('#landingpageInput').val() != "") {
 					$("#landingpageValue").html(
-							"<blockquote><font size=1><a href='" + $('#landingpageInput').val()
+							"<blockquote><font size=1><a href='"
+									+ $('#landingpageInput').val()
 									+ "' target='_blank'>"
-									+ $('#landingpageInput').val() + "</a></font></blockquote>");
+									+ $('#landingpageInput').val()
+									+ "</a></font></blockquote>");
 					$('#landingpageInput').hide();
 					$('#landingpageValue').show();
 				}
@@ -194,9 +247,11 @@
 				if ($('#metricsInput').val() != null
 						&& $('#metricsInput').val() != "") {
 					$("#metricsValue").html(
-							"<blockquote><font size=1><a href='" + $('#metricsInput').val()
+							"<blockquote><font size=1><a href='"
+									+ $('#metricsInput').val()
 									+ "' target='_blank'>"
-									+ $('#metricsInput').val() + "</a></font></blockquote>");
+									+ $('#metricsInput').val()
+									+ "</a></font></blockquote>");
 					$('#metricsInput').hide();
 					$('#metricsValue').show();
 				}
@@ -239,9 +294,11 @@
 				if ($('#salescopyInput').val() != null
 						&& $('#salescopyInput').val() != "") {
 					$("#salescopyValue").html(
-							"<blockquote><font size=1><a href='" + $('#salescopyInput').val()
+							"<blockquote><font size=1><a href='"
+									+ $('#salescopyInput').val()
 									+ "' target='_blank'>"
-									+ $('#salescopyInput').val() + "</a></font></blockquote>");
+									+ $('#salescopyInput').val()
+									+ "</a></font></blockquote>");
 					$('#salescopyInput').hide();
 					$('#salescopyValue').show();
 				}
@@ -261,75 +318,98 @@
 		var getRoadmapUrl = "../getroadmap" + "?name="
 				+ encodeURIComponent(getUrlParameter("Name"));
 
-		$.post(getRoadmapUrl, {}, function(data, status) {
+		$
+				.post(
+						getRoadmapUrl,
+						{},
+						function(data, status) {
 
-			var roadmap = jQuery.parseJSON(data);
+							var roadmap = jQuery.parseJSON(data);
 
-			if (roadmap.vision != null && roadmap.vision != "") {
-				$("#visionValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.vision + "' target=_blank>"
-								+ roadmap.vision + "</a></font></blockquote>");
-				$("#inputVision").val(roadmap.vision);
-				$("#inputVision").hide();
-			}
+							if (roadmap.vision != null && roadmap.vision != "") {
+								$("#visionValue").html(
+										"<blockquote><font size=1><a href='" + roadmap.vision + "' target=_blank>"
+												+ roadmap.vision
+												+ "</a></font></blockquote>");
+								$("#inputVision").val(roadmap.vision);
+								$("#inputVision").hide();
+							}
 
-			if (roadmap.mainfeature != null && roadmap.mainfeature != "") {
-				$("#mainFeatureInput").hide();
-				$("#mainFeatureValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.mainfeature + "' target=_blank>"
-								+ roadmap.mainfeature + "</a></font></blockquote>");
-				$("#mainFeatureInput").val(roadmap.mainfeature);
-			}
+							if (roadmap.mainfeature != null
+									&& roadmap.mainfeature != "") {
+								$("#mainFeatureField").hide();
+								$("#mainFeatureValue")
+										.html(
+												"&nbsp;&nbsp;&nbsp;<font size=1><a href='" + roadmap.mainfeature + "' target=_blank>"
+														+ roadmap.mainfeature
+														+ "</a></font> <img width=100 height=70 src='/serve?blob-key="
+														+ roadmap.mainFeatureImage
+														+ "' />");
+								$("#mainFeatureInput").val(roadmap.mainfeature);
+							}
 
-			if (roadmap.persona != null && roadmap.persona != "") {
-				$("#personaInput").hide();
-				$("#personaValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.persona + "' target=_blank>"
-								+ roadmap.persona + "</a></font></blockquote>");
-				$("#personaInput").val(roadmap.persona);
-			}
+							if (roadmap.persona != null
+									&& roadmap.persona != "") {
+								$("#personaField").hide();
+								$("#personaValue").html(
+										"&nbsp;&nbsp;&nbsp;<font size=1><a href='" + roadmap.persona + "' target=_blank>"
+												+ roadmap.persona
+												+ "</a></font><img width=100 height=70 src='/serve?blob-key="
+												+ roadmap.personaImage
+												+ "' />");
+								$("#personaInput").val(roadmap.persona);
+							}
 
-			if (roadmap.bmcanvas != null && roadmap.bmcanvas != "") {
-				$("#bmcanvasInput").hide();
-				$("#bmcanvasValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.bmcanvas + "' target=_blank>"
-								+ roadmap.bmcanvas + "</a></font></blockquote>");
-				$("#bmcanvasInput").val(roadmap.bmcanvas);
-			}
+							if (roadmap.bmcanvas != null
+									&& roadmap.bmcanvas != "") {
+								$("#bmcanvasInput").hide();
+								$("#bmcanvasValue").html(
+										"<blockquote><font size=1><a href='" + roadmap.bmcanvas + "' target=_blank>"
+												+ roadmap.bmcanvas
+												+ "</a></font></blockquote>");
+								$("#bmcanvasInput").val(roadmap.bmcanvas);
+							}
 
-			if (roadmap.landingpage != null && roadmap.landingpage != "") {
-				$("#landingpageInput").hide();
-				$("#landingpageValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.landingpage + "' target=_blank>"
-								+ roadmap.landingpage + "</a></font></blockquote>");
-				$("#landingpageInput").val(roadmap.landingpage);
-			}
+							if (roadmap.landingpage != null
+									&& roadmap.landingpage != "") {
+								$("#landingpageInput").hide();
+								$("#landingpageValue").html(
+										"<blockquote><font size=1><a href='" + roadmap.landingpage + "' target=_blank>"
+												+ roadmap.landingpage
+												+ "</a></font></blockquote>");
+								$("#landingpageInput").val(roadmap.landingpage);
+							}
 
-			if (roadmap.metrics != null && roadmap.metrics != "") {
-				$("#metricsInput").hide();
-				$("#metricsValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.metrics + "' target=_blank>"
-								+ roadmap.metrics + "</a></font></blockquote>");
-				$("#metricsInput").val(roadmap.metrics);
-			}
+							if (roadmap.metrics != null
+									&& roadmap.metrics != "") {
+								$("#metricsInput").hide();
+								$("#metricsValue").html(
+										"<blockquote><font size=1><a href='" + roadmap.metrics + "' target=_blank>"
+												+ roadmap.metrics
+												+ "</a></font></blockquote>");
+								$("#metricsInput").val(roadmap.metrics);
+							}
 
-			if (roadmap.mvp != null && roadmap.mvp != "") {
-				$("#mvpInput").hide();
-				$("#mvpValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.mvp + "' target=_blank>"
-								+ roadmap.mvp + "</a></font></blockquote>");
-				$("#mvpInput").val(roadmap.mvp);
-			}
+							if (roadmap.mvp != null && roadmap.mvp != "") {
+								$("#mvpInput").hide();
+								$("#mvpValue").html(
+										"<blockquote><font size=1><a href='" + roadmap.mvp + "' target=_blank>"
+												+ roadmap.mvp
+												+ "</a></font></blockquote>");
+								$("#mvpInput").val(roadmap.mvp);
+							}
 
-			if (roadmap.salescopy != null && roadmap.salescopy != "") {
-				$("#salescopyInput").hide();
-				$("#salescopyValue").html(
-						"<blockquote><font size=1><a href='" + roadmap.salescopy + "' target=_blank>"
-								+ roadmap.salescopy + "</a></font></blockquote>");
-				$("#salescopyInput").val(roadmap.salescopy);
-			}
+							if (roadmap.salescopy != null
+									&& roadmap.salescopy != "") {
+								$("#salescopyInput").hide();
+								$("#salescopyValue").html(
+										"<blockquote><font size=1><a href='" + roadmap.salescopy + "' target=_blank>"
+												+ roadmap.salescopy
+												+ "</a></font></blockquote>");
+								$("#salescopyInput").val(roadmap.salescopy);
+							}
 
-		});
+						});
 	}
 
 	function saveRoadmap() {

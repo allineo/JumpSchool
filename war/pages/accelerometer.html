@@ -3,19 +3,29 @@
 
 
 	<tr>
-		<td>Fund Raising</td>
+		<td align=center width=50><font size=1>Mat <br>Level <br>5</font></td>
+		<td width=180>Fund Raising</td>
 		<td width=30>
 			<div id="fundRaisingBox" style="background-color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
+</table>
+
+<table style="border-top:thin solid #E8E8E8">	
+	
 	<tr>
-		<td>Referred</td>
+		<td align=center width=50><font size=1>Mat <br>Level <br>4</font></td>
+		<td width=180>Referred</td>
 		<td width=30>
 			<div id="referredBox" style="background-color: #0000FF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
+</table>
+
+<table style="border-top:thin solid #E8E8E8">	
 	<tr>
-		<td>Satisfied</td>
+		<td rowspan=2 align=center width=50><font size=1>Mat <br>Level <br>3</font></td>
+		<td width=180>Satisfied</td>
 		<td width=30>
 			<div id="satisfiedBox" style="background-color: #33FFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
@@ -26,8 +36,12 @@
 			<div id="profitBox" style="background-color: #99FF00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
+</table>
+
+<table style="border-top:thin solid #E8E8E8">	
 	<tr>
-		<td>Loyal Users</td>
+		<td rowspan=3 align=center width=50><font size=1>Mat <br>Level <br>2</font></td>
+		<td width=180>Loyal Users</td>
 		<td width=30>
 			<div id="loyalUsersBox" style="background-color: #CCFF66;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
@@ -46,9 +60,12 @@
 			<div id="firstUsersBox" style="background-color: #FFFFAA;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
+</table>
 
+<table style="border-top:thin solid #E8E8E8">
 	<tr>
-		<td>Sign-ups/Pre-orders</td>
+		<td rowspan=5 align=center width=50><font size=1>Mat <br>Level <br>1</font></td>
+		<td width=180>Sign-ups/Pre-orders</td>
 		<td width=30>
 			<div id="signUpsBox" style="background-color: #FFCC00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
@@ -84,10 +101,14 @@
 
 
 <script>
+	ga('send', 'screenview', {
+		'screenName' : 'Accelerometer'
+	});
+
 	var fundRaisingColor = true;
 	$("#fundRaisingBox").click(function() {
 		if (fundRaisingColor) {
-			$("#fundRaisingBox").css('background-color', '#ffffff');
+			$("#fundRaisingBox").css('background-color', '#E8E8E8');
 			fundRaisingColor = false;
 		} else {
 			$("#fundRaisingBox").css('background-color', '#000000');
@@ -99,7 +120,7 @@
 	var referredColor = false;
 	$("#referredBox").click(function() {
 		if (referredColor) {
-			$("#referredBox").css('background-color', '#ffffff');
+			$("#referredBox").css('background-color', '#E8E8E8');
 			referredColor = false;
 		} else {
 			$("#referredBox").css('background-color', '#0000FF');
@@ -111,7 +132,7 @@
 	var satisfiedColor = false;
 	$("#satisfiedBox").click(function() {
 		if (satisfiedColor) {
-			$("#satisfiedBox").css('background-color', '#ffffff');
+			$("#satisfiedBox").css('background-color', '#E8E8E8');
 			satisfiedColor = false;
 		} else {
 			$("#satisfiedBox").css('background-color', '#33FFFF');
@@ -123,7 +144,7 @@
 	var profitColor = false;
 	$("#profitBox").click(function() {
 		if (profitColor) {
-			$("#profitBox").css('background-color', '#ffffff');
+			$("#profitBox").css('background-color', '#E8E8E8');
 			profitColor = false;
 		} else {
 			$("#profitBox").css('background-color', '#99FF00');
@@ -135,7 +156,7 @@
 	var loyalUsersColor = false;
 	$("#loyalUsersBox").click(function() {
 		if (loyalUsersColor) {
-			$("#loyalUsersBox").css('background-color', '#ffffff');
+			$("#loyalUsersBox").css('background-color', '#E8E8E8');
 			loyalUsersColor = false;
 		} else {
 			$("#loyalUsersBox").css('background-color', '#CCFF66');
@@ -147,7 +168,7 @@
 	var paidColor = false;
 	$("#paidBox").click(function() {
 		if (paidColor) {
-			$("#paidBox").css('background-color', '#ffffff');
+			$("#paidBox").css('background-color', '#E8E8E8');
 			paidColor = false;
 		} else {
 			$("#paidBox").css('background-color', '#FFFF00');
@@ -159,7 +180,7 @@
 	var firstUsersColor = false;
 	$("#firstUsersBox").click(function() {
 		if (firstUsersColor) {
-			$("#firstUsersBox").css('background-color', '#ffffff');
+			$("#firstUsersBox").css('background-color', '#E8E8E8');
 			firstUsersColor = false;
 		} else {
 			$("#firstUsersBox").css('background-color', '#FFFFAA');
@@ -171,7 +192,7 @@
 	var signUpsColor = false;
 	$("#signUpsBox").click(function() {
 		if (signUpsColor) {
-			$("#signUpsBox").css('background-color', '#ffffff');
+			$("#signUpsBox").css('background-color', '#E8E8E8');
 			signUpsColor = false;
 		} else {
 			$("#signUpsBox").css('background-color', '#FFCC00');
@@ -183,7 +204,7 @@
 	var positiveReplyColor = false;
 	$("#positiveReplyBox").click(function() {
 		if (positiveReplyColor) {
-			$("#positiveReplyBox").css('background-color', '#ffffff');
+			$("#positiveReplyBox").css('background-color', '#E8E8E8');
 			positiveReplyColor = false;
 		} else {
 			$("#positiveReplyBox").css('background-color', '#FFCC99');
@@ -195,7 +216,7 @@
 	var reachedCustomersColor = false;
 	$("#reachedCustomersBox").click(function() {
 		if (reachedCustomersColor) {
-			$("#reachedCustomersBox").css('background-color', '#ffffff');
+			$("#reachedCustomersBox").css('background-color', '#E8E8E8');
 			reachedCustomersColor = false;
 		} else {
 			$("#reachedCustomersBox").css('background-color', '#FF6600');
@@ -207,7 +228,7 @@
 	var focusedVisionColor = false;
 	$("#focusedVisionBox").click(function() {
 		if (focusedVisionColor) {
-			$("#focusedVisionBox").css('background-color', '#ffffff');
+			$("#focusedVisionBox").css('background-color', '#E8E8E8');
 			focusedVisionColor = false;
 		} else {
 			$("#focusedVisionBox").css('background-color', '#FF0000');
@@ -219,7 +240,7 @@
 	var didntStartColor = false;
 	$("#didntStartBox").click(function() {
 		if (didntStartColor) {
-			$("#didntStartBox").css('background-color', '#ffffff');
+			$("#didntStartBox").css('background-color', '#E8E8E8');
 			didntStartColor = false;
 		} else {
 			$("#didntStartBox").css('background-color', '#CC0000');
@@ -227,7 +248,6 @@
 		}
 		saveMetrics();
 	});
-
 
 	function getMetrics() {
 
@@ -262,7 +282,7 @@
 								focusedVisionColor = true;
 							} else {
 								$("#focusedVisionBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								focusedVisionColor = false;
 							}
 
@@ -275,7 +295,7 @@
 								reachedCustomersColor = true;
 							} else {
 								$("#reachedCustomersBox").css(
-										'background-color', '#ffffff');
+										'background-color', '#E8E8E8');
 								reachedCustomersColor = false;
 							}
 
@@ -288,7 +308,7 @@
 								positiveReplyColor = true;
 							} else {
 								$("#positiveReplyBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								positiveReplyColor = false;
 							}
 
@@ -301,7 +321,7 @@
 								signUpsColor = true;
 							} else {
 								$("#signUpsBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								signUpsColor = false;
 							}
 
@@ -314,7 +334,7 @@
 								firstUsersColor = true;
 							} else {
 								$("#firstUsersBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								firstUsersColor = false;
 							}
 
@@ -326,7 +346,7 @@
 								paidColor = true;
 							} else {
 								$("#paidBox")
-										.css('background-color', '#ffffff');
+										.css('background-color', '#E8E8E8');
 								paidColor = false;
 							}
 
@@ -339,7 +359,7 @@
 								loyalUsersColor = true;
 							} else {
 								$("#loyalUsersBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								loyalUsersColor = false;
 							}
 
@@ -352,7 +372,7 @@
 								satisfiedColor = true;
 							} else {
 								$("#satisfiedBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								satisfiedColor = false;
 							}
 
@@ -364,7 +384,7 @@
 								profitColor = true;
 							} else {
 								$("#profitBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								profitColor = false;
 							}
 
@@ -377,7 +397,7 @@
 								referredColor = true;
 							} else {
 								$("#referredBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								referredColor = false;
 							}
 
@@ -390,7 +410,7 @@
 								fundRaisingColor = true;
 							} else {
 								$("#fundRaisingBox").css('background-color',
-										'#ffffff');
+										'#E8E8E8');
 								fundRaisingColor = false;
 							}
 
@@ -408,7 +428,7 @@
 				+ encodeURIComponent(signUpsColor) + "&firstUsers="
 				+ encodeURIComponent(firstUsersColor) + "&paid="
 				+ encodeURIComponent(paidColor) + "&loyalUsers="
-				+ encodeURIComponent(loyalUsersColor)+ "&profit="
+				+ encodeURIComponent(loyalUsersColor) + "&profit="
 				+ encodeURIComponent(profitColor) + "&satisfied="
 				+ encodeURIComponent(satisfiedColor) + "&referred="
 				+ encodeURIComponent(referredColor) + "&fundRaising="

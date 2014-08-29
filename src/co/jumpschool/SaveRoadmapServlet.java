@@ -11,6 +11,8 @@ import co.jumpschool.utilities.Operations;
 import co.jumpschool.utilities.URLUtilities;
 
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 @SuppressWarnings("serial")
 public class SaveRoadmapServlet extends HttpServlet {
@@ -44,7 +46,10 @@ public class SaveRoadmapServlet extends HttpServlet {
 
 	private String saveData(HttpServletRequest request) {
 
-		Entity entity = new Entity("roadmap", URLUtilities.decode(request.getParameter("name")));
+		Key key = KeyFactory.createKey("roadmap",
+				URLUtilities.decode(request.getParameter("name")));
+
+		Entity entity = Operations.get(key);
 
 		entity.setProperty("vision",
 				URLUtilities.decode(request.getParameter("vision")));
@@ -52,8 +57,6 @@ public class SaveRoadmapServlet extends HttpServlet {
 				URLUtilities.decode(request.getParameter("mainfeature")));
 		entity.setProperty("persona",
 				URLUtilities.decode(request.getParameter("persona")));
-		entity.setProperty("ecosystem",
-				URLUtilities.decode(request.getParameter("ecosystem")));
 		entity.setProperty("bmcanvas",
 				URLUtilities.decode(request.getParameter("bmcanvas")));
 		entity.setProperty("landingpage",

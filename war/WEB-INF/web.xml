@@ -6,6 +6,24 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
     <servlet>
+		<servlet-name>upload</servlet-name>
+		<servlet-class>co.jumpschool.FileUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>upload</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
+    <servlet>
+		<servlet-name>serve</servlet-name>
+		<servlet-class>co.jumpschool.Serve</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>serve</servlet-name>
+		<url-pattern>/serve</url-pattern>
+	</servlet-mapping>
+	
+
+    <servlet>
 		<servlet-name>getmetrics</servlet-name>
 		<servlet-class>co.jumpschool.GetMetricsServlet</servlet-class>
 	</servlet>
