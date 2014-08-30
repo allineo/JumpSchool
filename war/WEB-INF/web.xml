@@ -59,5 +59,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>saveroadmap</servlet-name>
 		<url-pattern>/saveroadmap</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>wall</servlet-name>
+		<servlet-class>co.jumpschool.ListWallServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>wall</servlet-name>
+		<url-pattern>/wall</url-pattern>
+	</servlet-mapping>
     
 </web-app>

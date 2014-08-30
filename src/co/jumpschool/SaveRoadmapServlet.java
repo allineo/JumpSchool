@@ -67,6 +67,8 @@ public class SaveRoadmapServlet extends HttpServlet {
 				URLUtilities.decode(request.getParameter("mvp")));
 		entity.setProperty("salescopy",
 				URLUtilities.decode(request.getParameter("salescopy")));
+		entity.setProperty("maturity",
+				URLUtilities.decode(request.getParameter("maturity")));
 
 		return Operations.save(entity);
 	}

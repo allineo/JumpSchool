@@ -9,6 +9,8 @@
 %>
 
 
+<input type=hidden name=maturity id=maturity value=0 />
+
 <div data-role="fieldcontain" style="border-width: 0;">
 	<label for="inputVision" style="background-color: lightgray"><a
 		href="#popupVision" data-rel="popup" data-transition="pop"
@@ -30,13 +32,12 @@
 			placeholder="Your Main Feature Sketching" value=""></textarea>
 		<form method="post"
 			action='<%=blobstoreService.createUploadUrl("/upload")%>'
-			target=_blank enctype="multipart/form-data" data-ajax="false">
-			<input type=hidden name=name id=mainFeatureImageName
-				value= /> 
-				<input type=hidden name=fieldName id=fieldName value=mainFeatureImage />
-				<input name="imageField" type="file" id="imageField"
-				accept="image/*" capture /> <input type="submit" value="Send"
-				name="submit" class="btn">
+			enctype="multipart/form-data" data-ajax="false">
+			<input type=hidden name=name id=mainFeatureImageName value= /> <input
+				type=hidden name=fieldName id=fieldName value=mainFeatureImage /> <input
+				name="imageField" type="file" id="imageField" accept="image/*"
+				capture /> <input type="submit" value="Send" name="submit"
+				class="btn">
 		</form>
 	</div>
 	<div id="mainFeatureValue"></div>
@@ -54,11 +55,12 @@
 			placeholder="Your Persona/Empathy Map URL" value=""></textarea>
 		<form method="post"
 			action='<%=blobstoreService.createUploadUrl("/upload")%>'
-			target=_blank enctype="multipart/form-data" data-ajax="false">
-			<input type=hidden name=name id=personaImageName value= />
-			<input type=hidden name=fieldName id=fieldName value=personaImage />
-			<input name="imageField" type="file" id="imageField" accept="image/*" capture />
-			<input type="submit" value="Send" name="submit" class="btn">
+			enctype="multipart/form-data" data-ajax="false">
+			<input type=hidden name=name id=personaImageName value= /> <input
+				type=hidden name=fieldName id=fieldName value=personaImage /> <input
+				name="imageField" type="file" id="imageField" accept="image/*"
+				capture /> <input type="submit" value="Send" name="submit"
+				class="btn">
 		</form>
 	</div>
 	<div id="personaValue"></div>
@@ -335,8 +337,11 @@
 								$("#inputVision").hide();
 							}
 
-							if (roadmap.mainfeature != null
-									&& roadmap.mainfeature != "") {
+							if (roadmap.mainfeature == null) {
+								roadmap.mainfeature = "";
+							}
+							if ((roadmap.mainfeature != null && roadmap.mainfeature != "")
+									|| (roadmap.mainFeatureImage != null && roadmap.mainFeatureImage != "")) {
 								$("#mainFeatureField").hide();
 								$("#mainFeatureValue")
 										.html(
@@ -348,15 +353,20 @@
 								$("#mainFeatureInput").val(roadmap.mainfeature);
 							}
 
-							if (roadmap.persona != null
-									&& roadmap.persona != "") {
+							if (roadmap.persona == null) {
+								roadmap.persona = "";
+							}
+							if ((roadmap.persona != "")
+									|| (roadmap.personaImage != null && roadmap.personaImage != "")) {
+
 								$("#personaField").hide();
-								$("#personaValue").html(
-										"&nbsp;&nbsp;&nbsp;<font size=1><a href='" + roadmap.persona + "' target=_blank>"
-												+ roadmap.persona
-												+ "</a></font><img width=100 height=70 src='/serve?blob-key="
-												+ roadmap.personaImage
-												+ "' />");
+								$("#personaValue")
+										.html(
+												"&nbsp;&nbsp;&nbsp;<font size=1><a href='" + roadmap.persona + "' target=_blank>"
+														+ roadmap.persona
+														+ "</a></font><img width=100 height=70 src='/serve?blob-key="
+														+ roadmap.personaImage
+														+ "' />");
 								$("#personaInput").val(roadmap.persona);
 							}
 
@@ -409,6 +419,10 @@
 								$("#salescopyInput").val(roadmap.salescopy);
 							}
 
+							if (roadmap.maturity != null
+									&& roadmap.maturity != "") {
+								$("#maturity").val(roadmap.maturity);
+							}
 						});
 	}
 
@@ -425,7 +439,8 @@
 				+ "&metrics=" + encodeURIComponent($("#metricsInput").val())
 				+ "&mvp=" + encodeURIComponent($("#mvpInput").val())
 				+ "&salescopy="
-				+ encodeURIComponent($("#salescopyInput").val());
+				+ encodeURIComponent($("#salescopyInput").val()) + "&maturity="
+				+ encodeURIComponent($("#maturity").val());
 
 		$.post(saveRoadmapUrl, {}, function(data, status) {
 
