@@ -1,0 +1,151 @@
+
+<div id="wall">
+
+	<div id="companyName"></div>
+
+	<div id="Maturity3"></div>
+	<br /> <br />
+	<div id="Maturity2"></div>
+</div>
+
+<script>
+
+	$("#companyName")
+			.html(
+					"<img src=../JumpSchoolLogo.jpg />"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							+ "<button class='ui-btn ui-btn-inline ui-btn-b ui-mini' id='buttonAdd' "
+		+" onclick='window.location.href =\"../pages/getname.html\";'>"
+							+ "Add Your Company</button><br/>");
+
+	function getWall() {
+
+		var getWallUrl = "../wall";
+
+		$
+				.post(
+						getWallUrl,
+						{},
+						function(data, status) {
+
+							var results = jQuery.parseJSON(data);
+
+							var maturity3 = "<table><tr>";
+							var maturity2 = "<table><tr>";
+
+							var countMat3 = 0;
+							var countMat2 = 0;
+							$
+									.each(
+											results,
+											function(key, val) {
+
+												var bmcanvasPic = "";
+												if (val.bmcanvasImage != null
+														&& val.bmcanvasImage != "") {
+
+													bmcanvasPic = "<img width=50 height=50 src='/serve?blob-key="
+															+ val.bmcanvasImage
+															+ "' />";
+												}
+
+												var mainFeaturePic = "";
+												if (val.mainFeatureImage != null
+														&& val.mainFeatureImage != "") {
+
+													mainFeaturePic = "<img width=50 height=50 src='/serve?blob-key="
+															+ val.mainFeatureImage
+															+ "' />";
+												}
+
+												var personaPic = "";
+												if (val.personaImage != null
+														&& val.personaImage != "") {
+
+													personaPic = "<img width=50 height=50 src='/serve?blob-key="
+															+ val.personaImage
+															+ "' />";
+												}
+
+												var salescopyPic = "";
+												if (val.salescopyImage != null
+														&& val.salescopyImage != "") {
+
+													salescopyPic = "<img width=50 height=50 src='/serve?blob-key="
+															+ val.salescopyImage
+															+ "' />";
+												}
+
+												var param = "companyname="
+														+ val.ID + "&vision="
+														+ val.vision
+														+ "&bmcanvasURL="
+														+ val.bmcanvas
+														+ "&bmcanvasImage="
+														+ val.bmcanvasImage
+														+ "&mainFeatureURL="
+														+ val.mainfeature
+														+ "&mainFeatureImage="
+														+ val.mainFeatureImage
+														+ "&personaURL="
+														+ val.persona
+														+ "&personaImage="
+														+ val.personaImage
+														+ "&salescopyURL="
+														+ val.salescopy
+														+ "&salescopyImage="
+														+ val.salescopyImage
+														+ "&mvp=" + val.mvp;
+
+												var company = "<td width=130 valign=top onclick=\"loadCompany('"
+														+ param
+														+ "')\" >"
+														+ "<a href='#'>"
+														+ val.ID
+														+ "</a><br/>"
+														+ bmcanvasPic
+														+ mainFeaturePic
+
+														+ "<br/>"
+														+ personaPic
+														+ salescopyPic
+														+ "</td>";
+
+												if (val.maturity >= '3') {
+
+													maturity3 += company;
+													countMat3++;
+													if (countMat3 % 2 == 0) {
+														maturity3 += "<tr></tr>";
+													}
+												} else if (val.maturity == '2') {
+
+													maturity2 += company;
+													countMat2++;
+													if (countMat2 % 2 == 0) {
+														maturity2 += "<tr></tr>";
+													}
+												}
+
+											});
+
+							maturity3 += "</tr></table>";
+							maturity2 += "</tr></table>";
+
+							$("#Maturity3").html(maturity3);
+							$("#Maturity2").html(maturity2);
+						});
+	}
+	getWall();
+
+	function loadCompany(parameters) {
+
+		$("#wall").load("../pages/company.jsp", parameters);
+
+	}
+</script>
+
+
+
+
+

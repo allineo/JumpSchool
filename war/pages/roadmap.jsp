@@ -8,6 +8,8 @@
 			.getBlobstoreService();
 %>
 
+<div id="companyName"></div>
+
 
 <input type=hidden name=maturity id=maturity value=0 />
 
@@ -41,7 +43,7 @@
 		</form>
 	</div>
 	<div id="mainFeatureValue"></div>
-
+	<input type=hidden id=mainFeatureImageKey value= />
 </div>
 
 
@@ -64,15 +66,7 @@
 		</form>
 	</div>
 	<div id="personaValue"></div>
-</div>
-
-<div data-role="fieldcontain" style="border-width: 0;">
-	<label for="landingpageInput" style="background-color: lightgray"><a
-		href="#popupLandingPage" data-rel="popup" data-transition="pop"
-		title="Learn more">Landing Page</a>:</label>
-	<textarea name="landingpageInput" id="landingpageInput"
-		placeholder="Your Landing Page URL" value=""></textarea>
-	<div id="landingpageValue"></div>
+	<input type=hidden id=personaImageKey value= />
 </div>
 
 <div data-role="fieldcontain" style="border-width: 0;">
@@ -97,18 +91,44 @@
 	<label for="bmcanvasInput" style="background-color: lightgray"><a
 		href="#popupBMCanvas" data-rel="popup" data-transition="pop"
 		title="Learn more">Biz Model Canvas</a>:</label>
-	<textarea name="bmcanvasInput" id="bmcanvasInput"
-		placeholder="Your Business Model Canvas URL" value=""></textarea>
+
+	<div id="bmcanvasField">
+		<textarea name="bmcanvasInput" id="bmcanvasInput"
+			placeholder="Your Business Model Canvas URL" value=""></textarea>
+		<form method="post"
+			action='<%=blobstoreService.createUploadUrl("/upload")%>'
+			enctype="multipart/form-data" data-ajax="false">
+			<input type=hidden name=name id=bmcanvasImageName value= /> <input
+				type=hidden name=fieldName id=fieldName value=bmcanvasImage /> <input
+				name="imageField" type="file" id="imageField" accept="image/*"
+				capture /> <input type="submit" value="Send" name="submit"
+				class="btn">
+		</form>
+	</div>
 	<div id="bmcanvasValue"></div>
+	<input type=hidden id=bmcanvasImageKey value= />
 </div>
 
 <div data-role="fieldcontain" style="border-width: 0;">
 	<label for="salescopyInput" style="background-color: lightgray"><a
 		href="#popupSalesCopy" data-rel="popup" data-transition="pop"
 		title="Learn more">Sales Copy</a>:</label>
-	<textarea name="salescopyInput" id="salescopyInput"
-		placeholder="Your Sales Copy URL" value=""></textarea>
+
+	<div id="salescopyField">
+		<textarea name="salescopyInput" id="salescopyInput"
+			placeholder="Your Sales Copy URL" value=""></textarea>
+		<form method="post"
+			action='<%=blobstoreService.createUploadUrl("/upload")%>'
+			enctype="multipart/form-data" data-ajax="false">
+			<input type=hidden name=name id=salescopyImageName value= /> <input
+				type=hidden name=fieldName id=fieldName value=salescopyImage /> <input
+				name="imageField" type="file" id="imageField" accept="image/*"
+				capture /> <input type="submit" value="Send" name="submit"
+				class="btn">
+		</form>
+	</div>
 	<div id="salescopyValue"></div>
+	<input type=hidden id=salescopyImageKey value= />
 </div>
 
 
@@ -118,19 +138,147 @@
 		'screenName' : 'Roadmap'
 	});
 
+	$("#companyName").html(
+			"<img src=../JumpSchoolLogo.jpg />"
+					+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"
+					+ getUrlParameter("Name") + "</b><br/>");
+
 	$("#mainFeatureImageName").val(getUrlParameter("Name"));
 	$("#personaImageName").val(getUrlParameter("Name"));
+	$("#bmcanvasImageName").val(getUrlParameter("Name"));
+	$("#salescopyImageName").val(getUrlParameter("Name"));
+
+	function toggleFields(field) {
+
+		if (field != 'mainFeature') {
+
+			if (($('#mainFeatureInput').val() != null && $('#mainFeatureInput')
+					.val() != "")
+					|| ($('#mainFeatureImageKey').val() != null
+							&& $('#mainFeatureImageKey').val() != "" && $(
+							'#mainFeatureImageKey').val() != "/")) {
+
+				mainfeaturePic = "";
+				if ($('#mainFeatureImageKey').val() != null
+						&& $('#mainFeatureImageKey').val() != ""
+						&& $('#mainFeatureImageKey').val() != "/") {
+					mainfeaturePic = "<img width=100 height=70 src='/serve?blob-key="
+							+ $("#mainFeatureImageKey").val() + "' />";
+				}
+
+				$("#mainFeatureValue").html(
+						"&nbsp;&nbsp;&nbsp;<font size=1><a href='"
+								+ $('#mainFeatureInput').val()
+								+ "' target='_blank'>"
+								+ $('#mainFeatureInput').val() + "</a></font>"
+								+ mainfeaturePic);
+
+				$("#mainFeatureField").hide();
+				$("#mainFeatureValue").show();
+			}
+
+		}
+
+		if (field != 'persona') {
+
+			if (($('#personaInput').val() != null && $('#personaInput').val() != "")
+					|| ($('#personaImageKey').val() != null
+							&& $('#personaImageKey').val() != "" && $(
+							'#personaImageKey').val() != "/")) {
+
+				personaPic = "";
+				if ($('#personaImageKey').val() != null
+						&& $('#personaImageKey').val() != ""
+						&& $('#personaImageKey').val() != "/") {
+					personaPic = "<img width=100 height=70 src='/serve?blob-key="
+							+ $("#personaImageKey").val() + "' />";
+				}
+
+				$("#personaValue").html(
+						"&nbsp;&nbsp;&nbsp;<font size=1><a href='"
+								+ $("#personaInput").val() + "' target=_blank>"
+								+ $("#personaInput").val() + "</a></font> "
+								+ personaPic);
+
+				$("#personaField").hide();
+				$("#personaValue").show();
+			}
+
+		}
+
+		if (field != 'bmcanvas') {
+
+			if (($('#bmcanvasInput').val() != null && $('#bmcanvasInput').val() != "")
+					|| ($('#bmcanvasImageKey').val() != null
+							&& $('#bmcanvasImageKey').val() != "" && $(
+							'#bmcanvasImageKey').val() != "/")) {
+
+				bmcanvasPic = "";
+				if ($('#bmcanvasImageKey').val() != null
+						&& $('#bmcanvasImageKey').val() != ""
+						&& $('#bmcanvasImageKey').val() != "/") {
+					bmcanvasPic = "<img width=100 height=70 src='/serve?blob-key="
+							+ $("#bmcanvasImageKey").val() + "' />";
+				}
+
+				$("#bmcanvasValue").html(
+						"&nbsp;&nbsp;&nbsp;<font size=1><a href='"
+								+ $("#bmcanvasInput").val()
+								+ "' target=_blank>"
+								+ $("#bmcanvasInput").val() + "</a></font> "
+								+ bmcanvasPic);
+
+				$("#bmcanvasField").hide();
+				$("#bmcanvasValue").show();
+			}
+
+		}
+
+		if (field != 'salescopy') {
+
+			if (($('#salescopyInput').val() != null && $('#salescopyInput')
+					.val() != "")
+					|| ($('#salescopyImageKey').val() != null
+							&& $('#salescopyImageKey').val() != "" && $(
+							'#salescopyImageKey').val() != "/")) {
+
+				salescopyPic = "";
+				if ($('#salescopyImageKey').val() != null
+						&& $('#salescopyImageKey').val() != ""
+						&& $('#salescopyImageKey').val() != "/") {
+					salescopyPic = "<img width=100 height=70 src='/serve?blob-key="
+							+ $("#salescopyImageKey").val() + "' />";
+				}
+
+				$("#salescopyValue").html(
+						"&nbsp;&nbsp;&nbsp;<font size=1><a href='"
+								+ $("#salescopyInput").val()
+								+ "' target=_blank>"
+								+ $("#salescopyInput").val() + "</a></font> "
+								+ salescopyPic);
+
+				$("#salescopyField").hide();
+				$("#salescopyValue").show();
+			}
+		}
+	}
 
 	$("#visionValue").click(function() {
+		toggleFields('');
 		$("#visionValue").hide();
 		$("#inputVision").show();
 		$("#inputVision").focus();
+	});
+
+	$("#inputVision").click(function() {
+		toggleFields('');
 	});
 	$("#inputVision").change(function() {
 		saveRoadmap();
 	});
 	$("#inputVision").blur(
 			function() {
+
 				if ($('#inputVision').val() != null
 						&& $('#inputVision').val() != "") {
 					$("#visionValue").html(
@@ -145,107 +293,63 @@
 			});
 
 	$("#mainFeatureValue").click(function() {
+		toggleFields('mainFeature');
 		$("#mainFeatureValue").hide();
 		$("#mainFeatureField").show();
 		$("#mainFeatureInput").focus();
 	});
+
+	$("#mainFeatureInput").click(function() {
+		toggleFields('mainFeature');
+	});
 	$("#mainFeatureInput").change(function() {
 		saveRoadmap();
 	});
-	$("#mainFeatureField").blur(
-			function() {
-				if ($('#mainFeatureInput').val() != null
-						&& $('#mainFeatureInput').val() != "") {
-					$("#mainFeatureValue").html(
-							"<blockquote><font size=1><a href='"
-									+ $('#mainFeatureInput').val()
-									+ "' target='_blank'>"
-									+ $('#mainFeatureInput').val()
-									+ "</a></font></blockquote>");
-					$('#mainFeatureField').hide();
-					$('#mainFeatureValue').show();
-				}
-			});
 
 	$("#personaValue").click(function() {
+		toggleFields('persona');
 		$("#personaValue").hide();
 		$("#personaField").show();
 		$("#personaInput").focus();
 	});
+
+	$("#personaInput").click(function() {
+		toggleFields('persona');
+	});
 	$("#personaInput").change(function() {
 		saveRoadmap();
 	});
-	$("#personaInput").blur(
-			function() {
-				if ($('#personaInput').val() != null
-						&& $('#personaInput').val() != "") {
-					$("#personaValue").html(
-							"<blockquote><font size=1><a href='"
-									+ $('#personaInput').val()
-									+ "' target='_blank'>"
-									+ $('#personaInput').val()
-									+ "</a></font></blockquote>");
-					$('#personaField').hide();
-					$('#personaValue').show();
-				}
-			});
 
 	$("#bmcanvasValue").click(function() {
+		toggleFields('bmcanvas');
 		$("#bmcanvasValue").hide();
-		$("#bmcanvasInput").show();
+		$("#bmcanvasField").show();
 		$("#bmcanvasInput").focus();
+	});
+
+	$("#bmcanvasInput").click(function() {
+		toggleFields('bmcanvas');
 	});
 	$("#bmcanvasInput").change(function() {
 		saveRoadmap();
 	});
-	$("#bmcanvasInput").blur(
-			function() {
-				if ($('#bmcanvasInput').val() != null
-						&& $('#bmcanvasInput').val() != "") {
-					$("#bmcanvasValue").html(
-							"<blockquote><font size=1><a href='"
-									+ $('#bmcanvasInput').val()
-									+ "' target='_blank'>"
-									+ $('#bmcanvasInput').val()
-									+ "</a></font></blockquote>");
-					$('#bmcanvasInput').hide();
-					$('#bmcanvasValue').show();
-				}
-			});
-
-	$("#landingpageValue").click(function() {
-		$("#landingpageValue").hide();
-		$("#landingpageInput").show();
-		$("#landingpageInput").focus();
-	});
-	$("#landingpageInput").change(function() {
-		saveRoadmap();
-	});
-	$("#landingpageInput").blur(
-			function() {
-				if ($('#landingpageInput').val() != null
-						&& $('#landingpageInput').val() != "") {
-					$("#landingpageValue").html(
-							"<blockquote><font size=1><a href='"
-									+ $('#landingpageInput').val()
-									+ "' target='_blank'>"
-									+ $('#landingpageInput').val()
-									+ "</a></font></blockquote>");
-					$('#landingpageInput').hide();
-					$('#landingpageValue').show();
-				}
-			});
 
 	$("#metricsValue").click(function() {
+		toggleFields('');
 		$("#metricsValue").hide();
 		$("#metricsInput").show();
 		$("#metricsInput").focus();
+	});
+
+	$("#metricsInput").click(function() {
+		toggleFields('');
 	});
 	$("#metricsInput").change(function() {
 		saveRoadmap();
 	});
 	$("#metricsInput").blur(
 			function() {
+
 				if ($('#metricsInput').val() != null
 						&& $('#metricsInput').val() != "") {
 					$("#metricsValue").html(
@@ -260,9 +364,14 @@
 			});
 
 	$("#mvpValue").click(function() {
+		toggleFields('');
 		$("#mvpValue").hide();
 		$("#mvpInput").show();
 		$("#mvpInput").focus();
+	});
+
+	$("#mvpInput").click(function() {
+		toggleFields('');
 	});
 	$("#mvpInput").change(function() {
 		saveRoadmap();
@@ -284,32 +393,22 @@
 					});
 
 	$("#salescopyValue").click(function() {
+		toggleFields('salescopy');
 		$("#salescopyValue").hide();
-		$("#salescopyInput").show();
+		$("#salescopyField").show();
 		$("#salescopyInput").focus();
+	});
+
+	$("#salescopyInput").click(function() {
+		toggleFields('salescopy');
 	});
 	$("#salescopyInput").change(function() {
 		saveRoadmap();
 	});
-	$("#salescopyInput").blur(
-			function() {
-				if ($('#salescopyInput').val() != null
-						&& $('#salescopyInput').val() != "") {
-					$("#salescopyValue").html(
-							"<blockquote><font size=1><a href='"
-									+ $('#salescopyInput').val()
-									+ "' target='_blank'>"
-									+ $('#salescopyInput').val()
-									+ "</a></font></blockquote>");
-					$('#salescopyInput').hide();
-					$('#salescopyValue').show();
-				}
-			});
 
 	$("#popupVision").load("../pages/contents/vision.html");
 	$("#popupMainFeature").load("../pages/contents/mainfeature.html");
 	$("#popupPersona").load("../pages/contents/persona.html");
-	$("#popupLandingPage").load("../pages/contents/landingpage.html");
 	$("#popupBMCanvas").load("../pages/contents/bmcanvas.html");
 	$("#popupMetrics").load("../pages/contents/metrics.html");
 	$("#popupMvp").load("../pages/contents/mvp.html");
@@ -343,13 +442,22 @@
 							if ((roadmap.mainfeature != null && roadmap.mainfeature != "")
 									|| (roadmap.mainFeatureImage != null && roadmap.mainFeatureImage != "")) {
 								$("#mainFeatureField").hide();
+
+								var mainfeaturePic = "";
+								if (roadmap.mainFeatureImage != null
+										&& roadmap.mainFeatureImage != "") {
+									mainfeaturePic = "<img width=100 height=70 src='/serve?blob-key="
+											+ roadmap.mainFeatureImage + "' />";
+									$("#mainFeatureImageKey").val(
+											roadmap.mainFeatureImage);
+								}
 								$("#mainFeatureValue")
 										.html(
 												"&nbsp;&nbsp;&nbsp;<font size=1><a href='" + roadmap.mainfeature + "' target=_blank>"
 														+ roadmap.mainfeature
-														+ "</a></font> <img width=100 height=70 src='/serve?blob-key="
-														+ roadmap.mainFeatureImage
-														+ "' />");
+														+ "</a></font> "
+														+ mainfeaturePic);
+
 								$("#mainFeatureInput").val(roadmap.mainfeature);
 							}
 
@@ -360,34 +468,48 @@
 									|| (roadmap.personaImage != null && roadmap.personaImage != "")) {
 
 								$("#personaField").hide();
+
+								var personaPic = "";
+								if (roadmap.personaImage != null
+										&& roadmap.personaImage != "") {
+									personaPic = "<img width=100 height=70 src='/serve?blob-key="
+											+ roadmap.personaImage + "' />";
+									$("#personaImageKey").val(
+											roadmap.personaImage);
+								}
 								$("#personaValue")
 										.html(
 												"&nbsp;&nbsp;&nbsp;<font size=1><a href='" + roadmap.persona + "' target=_blank>"
 														+ roadmap.persona
-														+ "</a></font><img width=100 height=70 src='/serve?blob-key="
-														+ roadmap.personaImage
-														+ "' />");
+														+ "</a></font> "
+														+ personaPic);
 								$("#personaInput").val(roadmap.persona);
 							}
 
-							if (roadmap.bmcanvas != null
-									&& roadmap.bmcanvas != "") {
-								$("#bmcanvasInput").hide();
-								$("#bmcanvasValue").html(
-										"<blockquote><font size=1><a href='" + roadmap.bmcanvas + "' target=_blank>"
-												+ roadmap.bmcanvas
-												+ "</a></font></blockquote>");
-								$("#bmcanvasInput").val(roadmap.bmcanvas);
+							if (roadmap.bmcanvas == null) {
+								roadmap.bmcanvas = "";
 							}
+							if ((roadmap.bmcanvas != "")
+									|| (roadmap.bmcanvasImage != null && roadmap.bmcanvasImage != "")) {
+								$("#bmcanvasField").hide();
 
-							if (roadmap.landingpage != null
-									&& roadmap.landingpage != "") {
-								$("#landingpageInput").hide();
-								$("#landingpageValue").html(
-										"<blockquote><font size=1><a href='" + roadmap.landingpage + "' target=_blank>"
-												+ roadmap.landingpage
-												+ "</a></font></blockquote>");
-								$("#landingpageInput").val(roadmap.landingpage);
+								var bmcanvasPic = "";
+								if (roadmap.bmcanvasImage != null
+										&& roadmap.bmcanvasImage != "") {
+									bmcanvasPic = "<img width=100 height=70 src='/serve?blob-key="
+											+ roadmap.bmcanvasImage + "' />";
+									$("#bmcanvasImageKey").val(
+											roadmap.bmcanvasImage);
+								}
+
+								$("#bmcanvasValue")
+										.html(
+												"&nbsp;&nbsp;&nbsp;<font size=1><a href='" 
+								+ roadmap.bmcanvas + "' target=_blank>"
+														+ roadmap.bmcanvas
+														+ "</a></font> "
+														+ bmcanvasPic);
+								$("#bmcanvasInput").val(roadmap.bmcanvas);
 							}
 
 							if (roadmap.metrics != null
@@ -409,13 +531,30 @@
 								$("#mvpInput").val(roadmap.mvp);
 							}
 
-							if (roadmap.salescopy != null
-									&& roadmap.salescopy != "") {
-								$("#salescopyInput").hide();
-								$("#salescopyValue").html(
-										"<blockquote><font size=1><a href='" + roadmap.salescopy + "' target=_blank>"
-												+ roadmap.salescopy
-												+ "</a></font></blockquote>");
+							if (roadmap.salescopy == null) {
+								roadmap.salescopy = "";
+							}
+							if ((roadmap.salescopy != "")
+									|| (roadmap.salescopyImage != null && roadmap.salescopyImage != "")) {
+
+								$("#salescopyField").hide();
+
+								var salescopyPic = "";
+								if (roadmap.salescopyImage != null
+										&& roadmap.salescopyImage != "") {
+									salescopyPic = "<img width=100 height=70 src='/serve?blob-key="
+											+ roadmap.salescopyImage + "' />";
+									$("#salescopyImageKey").val(
+											roadmap.salecopyImage);
+								}
+
+								$("#salescopyValue")
+										.html(
+												"&nbsp;&nbsp;&nbsp;<font size=1><a href='"
+								+ roadmap.salescopy + "' target=_blank>"
+														+ roadmap.salescopy
+														+ "</a></font> "
+														+ salescopyPic);
 								$("#salescopyInput").val(roadmap.salescopy);
 							}
 
@@ -434,8 +573,6 @@
 				+ encodeURIComponent($("#mainFeatureInput").val())
 				+ "&persona=" + encodeURIComponent($("#personaInput").val())
 				+ "&bmcanvas=" + encodeURIComponent($("#bmcanvasInput").val())
-				+ "&landingpage="
-				+ encodeURIComponent($("#landingpageInput").val())
 				+ "&metrics=" + encodeURIComponent($("#metricsInput").val())
 				+ "&mvp=" + encodeURIComponent($("#mvpInput").val())
 				+ "&salescopy="

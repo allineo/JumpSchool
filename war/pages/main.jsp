@@ -4,7 +4,6 @@
 <head>
 <title>Jump School App</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -54,8 +53,6 @@
 			</div>
 		</div>
 
-		<div id="companyName"></div>
-
 
 		<div id=main role="main" class="ui-content"></div>
 
@@ -71,36 +68,31 @@
 	</div>
 
 	<script>
-		$(document).on(
-				"pageinit",
-				function(event) {
+		$(document).on("pageinit", function(event) {
 
-					var companyName = "<img src=../JumpSchoolLogo.jpg />"
-							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"
-							+ getUrlParameter("Name") + "</b>";
+			$("#accelerometerMenu").click(function() {
+				$("#main").load("../pages/accelerometer.html");
+			});
+			$("#roadmapMenu").click(function() {
+				$("#main").load("../pages/roadmap.jsp");
+			});
 
-					$("#companyName").html(companyName);
+			$("#wallMenu").click(function() {
+				$("#main").load("../pages/wall.html");
+			});
 
-					$("#accelerometerMenu").click(function() {
-						$("#companyName").html(companyName);
-						$("#main").load("../pages/accelerometer.html");
-					});
-					$("#roadmapMenu").click(function() {
-						$("#companyName").html(companyName);
-						$("#main").load("../pages/roadmap.jsp");
-					});
-					$("#wallMenu").click(function() {
-						$("#companyName").html("");
-						$("#main").load("../pages/wall.jsp");
-					});
-					if (getUrlParameter("upload")) {
-						$("#roadmapMenu").addClass("ui-btn-active");
-						$("#main").load("../pages/roadmap.jsp");
-					} else {
-						$("#accelerometerMenu").addClass("ui-btn-active");
-						$("#main").load("../pages/accelerometer.html");
-					}
-				});
+			$("#buttonAdd").click(function() {
+				window.location.href = "../pages/getname.html";
+			});
+
+			if (getUrlParameter("upload")) {
+				$("#roadmapMenu").addClass("ui-btn-active");
+				$("#main").load("../pages/roadmap.jsp");
+			} else {
+				$("#accelerometerMenu").addClass("ui-btn-active");
+				$("#main").load("../pages/accelerometer.html");
+			}
+		});
 	</script>
 
 </body>

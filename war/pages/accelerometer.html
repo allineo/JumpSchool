@@ -1,4 +1,5 @@
 
+<div id="companyName"></div>
 
 
 <table>
@@ -18,12 +19,18 @@
 <table style="border-top: thin solid #E8E8E8">
 
 	<tr>
-		<td align=center width=55><font size=1>Mat <br>Level
+		<td rowspan=2 align=center width=55><font size=1>Mat <br>Level
 				<br>4
 		</font></td>
+		<td width=180>Copy</td>
+		<td width=30>
+			<div id="copyBox" style="background-color: #0000FF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+		</td>
+	</tr>
+	<tr>
 		<td width=180>Referred</td>
 		<td width=30>
-			<div id="referredBox" style="background-color: #0000FF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div id="referredBox" style="background-color: #0099FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
 </table>
@@ -117,6 +124,11 @@
 		'screenName' : 'Accelerometer'
 	});
 
+	$("#companyName").html(
+			"<img src=../JumpSchoolLogo.jpg />"
+					+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"
+					+ getUrlParameter("Name") + "</b><br/>");
+
 	var fundRaisingColor = true;
 	$("#fundRaisingBox").click(function() {
 		if (fundRaisingColor) {
@@ -129,13 +141,25 @@
 		saveMetrics();
 	});
 
+	var copyColor = false;
+	$("#copyBox").click(function() {
+		if (copyColor) {
+			$("#copyBox").css('background-color', '#E8E8E8');
+			copyColor = false;
+		} else {
+			$("#copyBox").css('background-color', '#0000FF');
+			copyColor = true;
+		}
+		saveMetrics();
+	});
+
 	var referredColor = false;
 	$("#referredBox").click(function() {
 		if (referredColor) {
 			$("#referredBox").css('background-color', '#E8E8E8');
 			referredColor = false;
 		} else {
-			$("#referredBox").css('background-color', '#0000FF');
+			$("#referredBox").css('background-color', '#0099FF');
 			referredColor = true;
 		}
 		saveMetrics();
@@ -405,12 +429,24 @@
 									&& metrics.referred != "false"
 									&& metrics.referred != false) {
 								$("#referredBox").css('background-color',
-										'#0000FF');
+										'##0099FF');
 								referredColor = true;
 							} else {
 								$("#referredBox").css('background-color',
 										'#E8E8E8');
 								referredColor = false;
+							}
+
+							if (metrics.copy != null && metrics.copy != ""
+									&& metrics.copy != "false"
+									&& metrics.copy != false) {
+								$("#copyBox").css('background-color',
+										'##0000FF');
+								copyColor = true;
+							} else {
+								$("#copyBox")
+										.css('background-color', '#E8E8E8');
+								copyColor = false;
 							}
 
 							if (metrics.fundRaising != null
@@ -443,7 +479,8 @@
 				+ encodeURIComponent(loyalUsersColor) + "&profit="
 				+ encodeURIComponent(profitColor) + "&satisfied="
 				+ encodeURIComponent(satisfiedColor) + "&referred="
-				+ encodeURIComponent(referredColor) + "&fundRaising="
+				+ encodeURIComponent(referredColor) + "&copy="
+				+ encodeURIComponent(copyColor) + "&fundRaising="
 				+ encodeURIComponent(fundRaisingColor);
 
 		$.post(saveMetricsUrl, {}, function(data, status) {

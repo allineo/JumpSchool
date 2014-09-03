@@ -19,21 +19,29 @@ public class Operations {
 
 	public static JSONObject jsonGet(final Key key) {
 
-		JSONObject jsonresult = null;
+		JSONObject jsonresult = new JSONObject();
+
+		jsonresult = ConvertEntityToJson.getJson(get(key), null);
+
+		return jsonresult;
+	}
+
+	public static Entity get(final Key key) {
 
 		DatastoreService datastore = DatastoreServiceFactory
 				.getDatastoreService();
 
-		Entity result;
+		Entity result = new Entity(key);
+
 		try {
 			result = datastore.get(key);
-			jsonresult = ConvertEntityToJson.getJson(result, null);
+
 		} catch (EntityNotFoundException e) {
 
 			e.printStackTrace();
 		}
 
-		return jsonresult;
+		return result;
 	}
 
 	public static JSONArray jsonQuery(final Query q, final String returnField) {

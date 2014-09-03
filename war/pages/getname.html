@@ -35,29 +35,32 @@
 </head>
 
 <body>
-	<center>
+	<div align=center>
 		<img src='../JumpSchoolLogo.jpg' /> <br /> <br /> <br /> <b>Type
 			the name of your Company:</b>
 
-		<div div data-role="fieldcontain" style="border-width: 0;">
+		<div data-role="fieldcontain" style="border-width: 0;">
 			<input type="text" data-inline="true" id="inputName" value="" /> <input
 				type="button" id="buttonShowLink" data-inline="true"
 				value="Show My Link">
 		</div>
 		<br /> <br />
 		<div id="linkURL">
-			Or watch this video to know how the App works: <br>
-			<br>
+			Or watch this video to know how the App works: <br> <br>
 			<iframe width="250" height="150"
 				src="http://www.youtube.com/embed/XUSY-9tX27Q"> </iframe>
 		</div>
 
-	</center>
-
-	</center>
+	</div>
 
 
 	<script>
+		$("#inputName").keyup(function(event) {
+			if (event.keyCode == 13) {
+				$("#buttonShowLink").click();
+			}
+		});
+
 		$("#buttonShowLink")
 				.click(
 						function() {

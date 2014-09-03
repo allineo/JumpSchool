@@ -59,8 +59,6 @@ public class SaveRoadmapServlet extends HttpServlet {
 				URLUtilities.decode(request.getParameter("persona")));
 		entity.setProperty("bmcanvas",
 				URLUtilities.decode(request.getParameter("bmcanvas")));
-		entity.setProperty("landingpage",
-				URLUtilities.decode(request.getParameter("landingpage")));
 		entity.setProperty("metrics",
 				URLUtilities.decode(request.getParameter("metrics")));
 		entity.setProperty("mvp",
