@@ -4,6 +4,7 @@
 <head>
 <title>Jump School App</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -48,6 +49,7 @@
 				<ul>
 					<li><a id="accelerometerMenu" href="#">Accelerometer</a></li>
 					<li><a id="roadmapMenu" href="#">Roadmap</a></li>
+					<li><a id="meMenu" href="#">Me</a></li>
 					<li><a id="wallMenu" href="#">Wall</a></li>
 				</ul>
 			</div>
@@ -68,31 +70,55 @@
 	</div>
 
 	<script>
-		$(document).on("pageinit", function(event) {
+		$(document)
+				.on(
+						"pageinit",
+						function(event) {
 
-			$("#accelerometerMenu").click(function() {
-				$("#main").load("../pages/accelerometer.html");
-			});
-			$("#roadmapMenu").click(function() {
-				$("#main").load("../pages/roadmap.jsp");
-			});
+							$("#meMenu")
+									.click(
+											function() {
+												$("#main")
+														.load(
+																"../pages/company.jsp",
+																"companyname="
+																		+ encodeURIComponent(getUrlParameter("Name")));
+											});
 
-			$("#wallMenu").click(function() {
-				$("#main").load("../pages/wall.html");
-			});
+							$("#accelerometerMenu")
+									.click(
+											function() {
+												$("#main")
+														.load(
+																"../pages/accelerometer.jsp",
+																"companyname="
+																		+ encodeURIComponent(getUrlParameter("Name")));
+											});
+							$("#roadmapMenu").click(function() {
+								$("#main").load("../pages/roadmap.jsp");
+							});
 
-			$("#buttonAdd").click(function() {
-				window.location.href = "../pages/getname.html";
-			});
+							$("#wallMenu").click(function() {
+								$("#main").load("../pages/wall.html");
+							});
 
-			if (getUrlParameter("upload")) {
-				$("#roadmapMenu").addClass("ui-btn-active");
-				$("#main").load("../pages/roadmap.jsp");
-			} else {
-				$("#accelerometerMenu").addClass("ui-btn-active");
-				$("#main").load("../pages/accelerometer.html");
-			}
-		});
+							if (getUrlParameter("upload")) {
+								$("#roadmapMenu").addClass("ui-btn-active");
+								$("#main").load("../pages/roadmap.jsp");
+							} else {
+								$("#accelerometerMenu").addClass(
+										"ui-btn-active");
+								$("#main")
+										.load(
+												"../pages/accelerometer.jsp",
+												"companyname="
+														+ encodeURIComponent(getUrlParameter("Name")));
+							}
+
+							$("#buttonAdd").click(function() {
+								window.location.href = "../pages/getname.html";
+							});
+						});
 	</script>
 
 </body>

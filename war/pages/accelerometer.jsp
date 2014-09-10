@@ -6,12 +6,17 @@
 
 
 	<tr>
-		<td align=center width=55><font size=1>Mat <br>Level
-				<br>5
-		</font></td>
+		<td rowspan=2 align=center width=55><font size=1>Mat <br>Level
+		</font> <br /> <b>5</b></td>
 		<td width=180>Fund Raising</td>
 		<td width=30>
-			<div id="fundRaisingBox" style="background-color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div id="fundRaisingBox" style="background-color: #000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+		</td>
+	</tr>
+	<tr>
+		<td width=180>Bootstrapped</td>
+		<td width=30>
+			<div id="bootstrappedBox" style="background-color: #0000FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
 </table>
@@ -20,17 +25,16 @@
 
 	<tr>
 		<td rowspan=2 align=center width=55><font size=1>Mat <br>Level
-				<br>4
-		</font></td>
+		</font> <br /> <b>4</b></td>
 		<td width=180>Copy</td>
 		<td width=30>
-			<div id="copyBox" style="background-color: #0000FF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div id="copyBox" style="background-color: #0099FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
 	<tr>
 		<td width=180>Referred</td>
 		<td width=30>
-			<div id="referredBox" style="background-color: #0099FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div id="referredBox" style="background-color: #00CCFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</td>
 	</tr>
 </table>
@@ -38,8 +42,7 @@
 <table style="border-top: thin solid #E8E8E8">
 	<tr>
 		<td rowspan=2 align=center width=55><font size=1>Mat <br>Level
-				<br>3
-		</font></td>
+		</font> <br /> <b>3</b></td>
 		<td width=180>Satisfied</td>
 		<td width=30>
 			<div id="satisfiedBox" style="background-color: #33FFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -56,8 +59,7 @@
 <table style="border-top: thin solid #E8E8E8">
 	<tr>
 		<td rowspan=3 align=center width=55><font size=1>Mat <br>Level
-				<br>2
-		</font></td>
+		</font> <br /> <b>2</b></td>
 		<td width=180>Loyal Users</td>
 		<td width=30>
 			<div id="loyalUsersBox" style="background-color: #CCFF66;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -82,8 +84,7 @@
 <table style="border-top: thin solid #E8E8E8">
 	<tr>
 		<td rowspan=5 align=center width=55><font size=1>Mat <br>Level
-				<br>1
-		</font></td>
+		</font> <br /> <b>1</b></td>
 		<td width=180>Sign-ups/Pre-orders</td>
 		<td width=30>
 			<div id="signUpsBox" style="background-color: #FFCC00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -123,11 +124,18 @@
 	ga('send', 'screenview', {
 		'screenName' : 'Accelerometer'
 	});
+	
+	var companyname = '<%=request.getParameter("companyname")%>';
 
-	$("#companyName").html(
-			"<img src=../JumpSchoolLogo.jpg />"
-					+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"
-					+ getUrlParameter("Name") + "</b><br/>");
+	$("#companyName")
+			.html(
+					"<img src=../JumpSchoolLogo.jpg />"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><a href=# onclick=loadCompany();>"
+							+ companyname + "</a></b><br/>");
+	
+	function loadCompany() {
+		$("#main").load("../pages/company.jsp", "companyname=" + companyname);
+	}
 
 	var fundRaisingColor = true;
 	$("#fundRaisingBox").click(function() {
@@ -141,13 +149,25 @@
 		saveMetrics();
 	});
 
+	var bootstrappedColor = true;
+	$("#bootstrappedBox").click(function() {
+		if (bootstrappedColor) {
+			$("#bootstrappedBox").css('background-color', '#E8E8E8');
+			bootstrappedColor = false;
+		} else {
+			$("#bootstrappedBox").css('background-color', '#0000FF');
+			bootstrappedColor = true;
+		}
+		saveMetrics();
+	});
+
 	var copyColor = false;
 	$("#copyBox").click(function() {
 		if (copyColor) {
 			$("#copyBox").css('background-color', '#E8E8E8');
 			copyColor = false;
 		} else {
-			$("#copyBox").css('background-color', '#0000FF');
+			$("#copyBox").css('background-color', '#0099FF');
 			copyColor = true;
 		}
 		saveMetrics();
@@ -159,7 +179,7 @@
 			$("#referredBox").css('background-color', '#E8E8E8');
 			referredColor = false;
 		} else {
-			$("#referredBox").css('background-color', '#0099FF');
+			$("#referredBox").css('background-color', '#00CCFF');
 			referredColor = true;
 		}
 		saveMetrics();
@@ -287,8 +307,7 @@
 
 	function getMetrics() {
 
-		var getMetricsUrl = "../getmetrics" + "?name="
-				+ encodeURIComponent(getUrlParameter("Name"));
+		var getMetricsUrl = "../getmetrics?name=" + companyname;
 
 		$
 				.post(getMetricsUrl, {},
@@ -429,7 +448,7 @@
 									&& metrics.referred != "false"
 									&& metrics.referred != false) {
 								$("#referredBox").css('background-color',
-										'##0099FF');
+										'#00CCFF');
 								referredColor = true;
 							} else {
 								$("#referredBox").css('background-color',
@@ -440,13 +459,26 @@
 							if (metrics.copy != null && metrics.copy != ""
 									&& metrics.copy != "false"
 									&& metrics.copy != false) {
-								$("#copyBox").css('background-color',
-										'##0000FF');
+								$("#copyBox")
+										.css('background-color', '#0099FF');
 								copyColor = true;
 							} else {
 								$("#copyBox")
 										.css('background-color', '#E8E8E8');
 								copyColor = false;
+							}
+
+							if (metrics.bootstrapped != null
+									&& metrics.bootstrapped != ""
+									&& metrics.bootstrapped != "false"
+									&& metrics.bootstrapped != false) {
+								$("#bootstrappedBox").css('background-color',
+										'#0000FF');
+								bootstrappedColor = true;
+							} else {
+								$("#bootstrappedBox").css('background-color',
+										'#E8E8E8');
+								bootstrappedColor = false;
 							}
 
 							if (metrics.fundRaising != null
@@ -467,10 +499,10 @@
 
 	function saveMetrics() {
 
-		var saveMetricsUrl = "../savemetrics" + "?name="
-				+ encodeURIComponent(getUrlParameter("Name")) + "&didntStart="
-				+ encodeURIComponent(didntStartColor) + "&focusedVision="
-				+ encodeURIComponent(focusedVisionColor) + "&reachedCustomers="
+		var saveMetricsUrl = "../savemetrics" + "?name=" + companyname
+				+ "&didntStart=" + encodeURIComponent(didntStartColor)
+				+ "&focusedVision=" + encodeURIComponent(focusedVisionColor)
+				+ "&reachedCustomers="
 				+ encodeURIComponent(reachedCustomersColor) + "&positiveReply="
 				+ encodeURIComponent(positiveReplyColor) + "&signUps="
 				+ encodeURIComponent(signUpsColor) + "&firstUsers="
@@ -480,7 +512,8 @@
 				+ encodeURIComponent(profitColor) + "&satisfied="
 				+ encodeURIComponent(satisfiedColor) + "&referred="
 				+ encodeURIComponent(referredColor) + "&copy="
-				+ encodeURIComponent(copyColor) + "&fundRaising="
+				+ encodeURIComponent(copyColor) + "&bootstrapped="
+				+ encodeURIComponent(bootstrappedColor) + "&fundRaising="
 				+ encodeURIComponent(fundRaisingColor);
 
 		$.post(saveMetricsUrl, {}, function(data, status) {

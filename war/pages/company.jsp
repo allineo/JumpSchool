@@ -1,86 +1,125 @@
-<div id="companyName">
-
-	<img src=../JumpSchoolLogo.jpg /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>
-		<%=request.getParameter("companyname")%>
-	</b><br /> <br />
-</div>
-
+<div id="companyName"></div>
+<br />
 
 <div id="company"></div>
 
 <br />
+<hr />
+<br />
+
+<div id="comments"></div>
 
 
 <script>
 var companyname = '<%=request.getParameter("companyname")%>';
-var vision = '<%=request.getParameter("vision")%>';
-var bmcanvasURL = '<%=request.getParameter("bmcanvasURL")%>';
-var bmcanvasImage = '<%=request.getParameter("bmcanvasImage")%>';
-var mainFeatureURL = '<%=request.getParameter("mainFeatureURL")%>';
-var mainFeatureImage = '<%=request.getParameter("mainFeatureImage")%>';
-var personaURL = '<%=request.getParameter("personaURL")%>';
-var personaImage = '<%=request.getParameter("personaImage")%>';
-var salescopyURL = '<%=request.getParameter("salescopyURL")%>';
-var salescopyImage = '<%=request.getParameter("salescopyImage")%>';
-var mvp = '<%=request.getParameter("mvp")%>';
 
-	var company = "<label>Vision & Team: <a href='"+vision+"' target=_blank>"
-			+ vision + "</a></label>";
+	$("#companyName")
+			.html(
+					"<img src=../JumpSchoolLogo.jpg />"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><a href=# onclick='loadCompany();'>"
+							+ companyname + "</a></b><br/>");
 
-	var bmcanvasPic = "";
-	if (bmcanvasImage != 'null' && bmcanvasImage != ""
-			&& bmcanvasImage != "undefined") {
-		if (bmcanvasURL == 'null' || bmcanvasURL == "") {
-			bmcanvasURL = "/serve?blob-key=" + bmcanvasImage;
-		}
-		bmcanvasPic = "<a href='"+bmcanvasURL+"' target=_blank>"
-				+ "<img width=150 height=150 src='/serve?blob-key="
-				+ bmcanvasImage + "' /></a>";
+	function loadCompany() {
+		$("#main").load("../pages/company.jsp", "companyname=" + companyname);
 	}
 
-	company += bmcanvasPic;
+	function getRoadmap() {
 
-	var mainFeaturePic = "";
-	if (mainFeatureImage != 'null' && mainFeatureImage != ""
-			&& mainFeatureImage != "undefined") {
-		if (mainFeatureURL == 'null' || mainFeatureURL == "") {
+		var getRoadmapUrl = "../getroadmap?name=" + companyname;
 
-			mainFeatureURL = "/serve?blob-key=" + mainFeatureImage;
-		}
-		mainFeaturePic = "<a href='"+mainFeatureURL+"' target=_blank>"
-				+ "<img width=150 height=150 src='/serve?blob-key="
-				+ mainFeatureImage + "' /></a>";
+		$
+				.post(
+						getRoadmapUrl,
+						{},
+						function(data, status) {
+
+							var roadmap = jQuery.parseJSON(data);
+
+							var company = "<label>Vision & Team: <a href='"+roadmap.vision+"' target=_blank>"
+									+ roadmap.vision + "</a></label>";
+
+							var bmcanvasPic = "";
+							if (roadmap.bmcanvasImage != 'null'
+									&& roadmap.bmcanvasImage != ""
+									&& roadmap.bmcanvasImage != "undefined") {
+								bmcanvasURL = roadmap.bmcanvas;
+								if (bmcanvasURL == 'null' || bmcanvasURL == "") {
+									bmcanvasURL = roadmap.bmcanvasImage;
+								}
+								bmcanvasPic = "<a href='"+bmcanvasURL+"' target=_blank>"
+										+ "<img width=130 height=130 title='Business Model Canvas' src='"
+			+ roadmap.bmcanvasImage + "=s150' /></a>";
+							}
+
+							company += bmcanvasPic;
+
+							var mainFeaturePic = "";
+							if (roadmap.mainFeatureImage != 'null'
+									&& roadmap.mainFeatureImage != ""
+									&& roadmap.mainFeatureImage != "undefined") {
+								mainFeatureURL = roadmap.mainFeature;
+								if (mainFeatureURL == 'null'
+										|| mainFeatureURL == "") {
+
+									mainFeatureURL = roadmap.mainFeatureImage;
+								}
+								mainFeaturePic = "<a href='"+mainFeatureURL+"' target=_blank>"
+										+ "<img width=130 height=130 title='Main Feature' src='"
+			+ roadmap.mainFeatureImage + "=s150' /></a>";
+							}
+							company += mainFeaturePic + "<br/>";
+
+							var personaPic = "";
+							if (roadmap.personaImage != 'null'
+									&& roadmap.personaImage != ""
+									&& roadmap.personaImage != "undefined") {
+								personaURL = roadmap.persona;
+								if (personaURL == 'null' || personaURL == "") {
+									personaURL = roadmap.personaImage;
+								}
+								personaPic = "<a href='"+personaURL+"' target=_blank>"
+										+ "<img width=130 height=130 title='Persona' src='"
+			+ roadmap.personaImage + "=s150' /></a>";
+							}
+							company += personaPic;
+
+							var salescopyPic = "";
+							if (roadmap.salescopyImage != 'null'
+									&& roadmap.salescopyImage != ""
+									&& roadmap.salescopyImage != "undefined") {
+								salescopyURL = roadmap.salescopy;
+								if (salescopyURL == 'null'
+										|| salescopyURL == "") {
+									salescopyURL = roadmap.salescopyImage;
+								}
+								salescopyPic = "<a href='"+salescopyURL+"' target=_blank>"
+										+ "<img width=130 height=130 title='Copywriting' src='"
+			+ roadmap.salescopyImage + "=s150' /></a>";
+							}
+							company += salescopyPic;
+
+							company += "<br/><label>Minimum Viable Product: <a href='"+roadmap.mvp+"' target=_blank>"
+									+ roadmap.mvp + "</a></label>";
+
+							company += "<label><a href=# onclick='openAcceleremoter(\""
+									+ roadmap.ID
+									+ "\");'>Accelerometer</a></label>";
+
+							$("#company").html(company);
+
+							$("#comments").load("../pages/comments.jsp",
+									'companyname=' + companyname);
+
+						});
 	}
-	company += mainFeaturePic + "<br/>";
 
-	var personaPic = "";
-	if (personaImage != 'null' && personaImage != ""
-			&& personaImage != "undefined") {
-		if (personaURL == 'null' || personaURL == "") {
-			personaURL = "/serve?blob-key=" + personaImage;
-		}
-		personaPic = "<a href='"+personaURL+"' target=_blank>"
-				+ "<img width=150 height=150 src='/serve?blob-key="
-				+ personaImage + "' /></a>";
+	getRoadmap();
+
+	function openAcceleremoter(companyname) {
+
+		$("#main").load("../pages/accelerometer.jsp",
+				"companyname=" + companyname);
 	}
-	company += personaPic;
-
-	var salescopyPic = "";
-	if (salescopyImage != 'null' && salescopyImage != ""
-			&& salescopyImage != "undefined") {
-		if (salescopyURL == 'null' || salescopyURL == "") {
-			salescopyURL = "/serve?blob-key=" + salescopyImage;
-		}
-		salescopyPic = "<a href='"+salescopyURL+"' target=_blank>"
-				+ "<img width=150 height=150 src='/serve?blob-key="
-				+ salescopyImage + "' /></a>";
-	}
-	company += salescopyPic;
-
-	company += "<br/><label>Minimum Viable Product: <a href='"+mvp+"' target=_blank>"
-			+ mvp + "</a></label>";
-
-	$("#company").html(company);
 </script>
 
 

@@ -42,7 +42,7 @@
 		<div data-role="fieldcontain" style="border-width: 0;">
 			<input type="text" data-inline="true" id="inputName" value="" /> <input
 				type="button" id="buttonShowLink" data-inline="true"
-				value="Show My Link">
+				value="Start My Company">
 		</div>
 		<br /> <br />
 		<div id="linkURL">
@@ -55,22 +55,29 @@
 
 
 	<script>
-		$("#inputName").keyup(function(event) {
-			if (event.keyCode == 13) {
-				$("#buttonShowLink").click();
-			}
-		});
+		$("#inputName")
+				.keyup(
+						function(event) {
+							if (event.keyCode == 13) {
+								//$("#buttonShowLink").click();
+								window.location.href = 'http://JumpStartupSchool.appspot.com?Name='
+										+ $("#inputName").val();
+							}
+						});
 
 		$("#buttonShowLink")
 				.click(
 						function() {
 
-							var messageLink = "Click the link below to access your Roadmap:<br>"
+							window.location.href = 'http://JumpStartupSchool.appspot.com?Name='
+									+ $("#inputName").val();
+
+							/*var messageLink = "Click the link below to access your Roadmap:<br>"
 									+ "<a href='http://JumpStartupSchool.appspot.com?Name="
 									+ $("#inputName").val()
 									+ "'>http://JumpStartupSchool.appspot.com?Name="
-									+ $("#inputName").val() + "</a>";
-							$("#linkURL").html(messageLink);
+									+ $("#inputName").val() + "</a>";*/
+							//$("#linkURL").html(messageLink);
 						});
 	</script>
 

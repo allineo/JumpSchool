@@ -112,7 +112,7 @@
 <div data-role="fieldcontain" style="border-width: 0;">
 	<label for="salescopyInput" style="background-color: lightgray"><a
 		href="#popupSalesCopy" data-rel="popup" data-transition="pop"
-		title="Learn more">Sales Copy</a>:</label>
+		title="Learn more">Copy</a>:</label>
 
 	<div id="salescopyField">
 		<textarea name="salescopyInput" id="salescopyInput"
@@ -162,8 +162,8 @@
 				if ($('#mainFeatureImageKey').val() != null
 						&& $('#mainFeatureImageKey').val() != ""
 						&& $('#mainFeatureImageKey').val() != "/") {
-					mainfeaturePic = "<img width=100 height=70 src='/serve?blob-key="
-							+ $("#mainFeatureImageKey").val() + "' />";
+					mainfeaturePic = "<img width=100 height=70 src='"
+							+ $("#mainFeatureImageKey").val() + "=s100' />";
 				}
 
 				$("#mainFeatureValue").html(
@@ -190,8 +190,8 @@
 				if ($('#personaImageKey').val() != null
 						&& $('#personaImageKey').val() != ""
 						&& $('#personaImageKey').val() != "/") {
-					personaPic = "<img width=100 height=70 src='/serve?blob-key="
-							+ $("#personaImageKey").val() + "' />";
+					personaPic = "<img width=100 height=70 src='"
+							+ $("#personaImageKey").val() + "=s100' />";
 				}
 
 				$("#personaValue").html(
@@ -217,8 +217,8 @@
 				if ($('#bmcanvasImageKey').val() != null
 						&& $('#bmcanvasImageKey').val() != ""
 						&& $('#bmcanvasImageKey').val() != "/") {
-					bmcanvasPic = "<img width=100 height=70 src='/serve?blob-key="
-							+ $("#bmcanvasImageKey").val() + "' />";
+					bmcanvasPic = "<img width=100 height=70 src='"
+							+ $("#bmcanvasImageKey").val() + "=s100' />";
 				}
 
 				$("#bmcanvasValue").html(
@@ -246,8 +246,8 @@
 				if ($('#salescopyImageKey').val() != null
 						&& $('#salescopyImageKey').val() != ""
 						&& $('#salescopyImageKey').val() != "/") {
-					salescopyPic = "<img width=100 height=70 src='/serve?blob-key="
-							+ $("#salescopyImageKey").val() + "' />";
+					salescopyPic = "<img width=100 height=70 src='"
+							+ $("#salescopyImageKey").val() + "=s100' />";
 				}
 
 				$("#salescopyValue").html(
@@ -446,8 +446,8 @@
 								var mainfeaturePic = "";
 								if (roadmap.mainFeatureImage != null
 										&& roadmap.mainFeatureImage != "") {
-									mainfeaturePic = "<img width=100 height=70 src='/serve?blob-key="
-											+ roadmap.mainFeatureImage + "' />";
+									mainfeaturePic = "<img width=100 height=70 src='"
+											+ roadmap.mainFeatureImage + "=s100' />";
 									$("#mainFeatureImageKey").val(
 											roadmap.mainFeatureImage);
 								}
@@ -472,8 +472,8 @@
 								var personaPic = "";
 								if (roadmap.personaImage != null
 										&& roadmap.personaImage != "") {
-									personaPic = "<img width=100 height=70 src='/serve?blob-key="
-											+ roadmap.personaImage + "' />";
+									personaPic = "<img width=100 height=70 src='"
+											+ roadmap.personaImage + "=s100' />";
 									$("#personaImageKey").val(
 											roadmap.personaImage);
 								}
@@ -496,8 +496,8 @@
 								var bmcanvasPic = "";
 								if (roadmap.bmcanvasImage != null
 										&& roadmap.bmcanvasImage != "") {
-									bmcanvasPic = "<img width=100 height=70 src='/serve?blob-key="
-											+ roadmap.bmcanvasImage + "' />";
+									bmcanvasPic = "<img width=100 height=70 src='"
+											+ roadmap.bmcanvasImage + "=s100' />";
 									$("#bmcanvasImageKey").val(
 											roadmap.bmcanvasImage);
 								}
@@ -542,8 +542,8 @@
 								var salescopyPic = "";
 								if (roadmap.salescopyImage != null
 										&& roadmap.salescopyImage != "") {
-									salescopyPic = "<img width=100 height=70 src='/serve?blob-key="
-											+ roadmap.salescopyImage + "' />";
+									salescopyPic = "<img width=100 height=70 src='"
+											+ roadmap.salescopyImage + "=s100' />";
 									$("#salescopyImageKey").val(
 											roadmap.salecopyImage);
 								}
