@@ -70,6 +70,8 @@ public class SaveMetricsServlet extends HttpServlet {
 				URLUtilities.decode(request.getParameter("referred")));
 		entity.setProperty("copy",
 				URLUtilities.decode(request.getParameter("copy")));
+		entity.setProperty("bootstrapped",
+				URLUtilities.decode(request.getParameter("bootstrapped")));
 		entity.setProperty("fundRaising",
 				URLUtilities.decode(request.getParameter("fundRaising")));
 

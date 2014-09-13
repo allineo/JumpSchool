@@ -59,6 +59,8 @@
 				.keyup(
 						function(event) {
 							if (event.keyCode == 13) {
+
+								saveRoadmap();
 								//$("#buttonShowLink").click();
 								window.location.href = 'http://JumpStartupSchool.appspot.com?Name='
 										+ $("#inputName").val();
@@ -68,6 +70,8 @@
 		$("#buttonShowLink")
 				.click(
 						function() {
+
+							saveRoadmap();
 
 							window.location.href = 'http://JumpStartupSchool.appspot.com?Name='
 									+ $("#inputName").val();
@@ -79,6 +83,15 @@
 									+ $("#inputName").val() + "</a>";*/
 							//$("#linkURL").html(messageLink);
 						});
+
+		function saveRoadmap() {
+
+			var saveRoadmapUrl = "../createroadmap?name="
+					+ encodeURIComponent($("#inputName").val());
+
+			$.post(saveRoadmapUrl, {}, function(data, status) {
+			});
+		}
 	</script>
 
 

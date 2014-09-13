@@ -13,8 +13,8 @@ import co.jumpschool.utilities.URLUtilities;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
-import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 @SuppressWarnings("serial")
 public class ListCommentsServlet extends HttpServlet {
@@ -52,7 +52,10 @@ public class ListCommentsServlet extends HttpServlet {
 
 		Query query = new Query("comments");
 
-		query.setFilter(new FilterPredicate("companyname", FilterOperator.EQUAL, name));
+		query.setFilter(new FilterPredicate("companyname",
+				FilterOperator.EQUAL, name));
+		query.addSort("timestamp", SortDirection.DESCENDING);
+		
 		return Operations.jsonQuery(query);
 	}
 

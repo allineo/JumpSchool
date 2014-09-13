@@ -4,6 +4,7 @@
 <head>
 <title>Jump School App</title>
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
@@ -49,7 +50,7 @@
 				<ul>
 					<li><a id="accelerometerMenu" href="#">Accelerometer</a></li>
 					<li><a id="roadmapMenu" href="#">Roadmap</a></li>
-					<li><a id="meMenu" href="#">Me</a></li>
+					<li><a id="meMenu" href="#">Feedback</a></li>
 					<li><a id="wallMenu" href="#">Wall</a></li>
 				</ul>
 			</div>

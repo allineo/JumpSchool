@@ -46,7 +46,13 @@ var companyname = '<%=request.getParameter("companyname")%>';
 								if (bmcanvasURL == 'null' || bmcanvasURL == "") {
 									bmcanvasURL = roadmap.bmcanvasImage;
 								}
-								bmcanvasPic = "<a href='"+bmcanvasURL+"' target=_blank>"
+								bmcanvasPic = "<a href='javascript:void(0)' onclick=\"openImage('"
+										+ roadmap.ID
+										+ "','"
+										+ bmcanvasURL
+										+ "','Business Model Canvas','"
+										+ roadmap.bmcanvasImage
+										+ "');\">"
 										+ "<img width=130 height=130 title='Business Model Canvas' src='"
 			+ roadmap.bmcanvasImage + "=s150' /></a>";
 							}
@@ -59,13 +65,20 @@ var companyname = '<%=request.getParameter("companyname")%>';
 									&& roadmap.mainFeatureImage != "undefined") {
 								mainFeatureURL = roadmap.mainFeature;
 								if (mainFeatureURL == 'null'
-										|| mainFeatureURL == "") {
+										|| mainFeatureURL == ""
+										|| mainFeatureURL == "undefined") {
 
 									mainFeatureURL = roadmap.mainFeatureImage;
 								}
-								mainFeaturePic = "<a href='"+mainFeatureURL+"' target=_blank>"
+								mainFeaturePic = "<a href='javascript:void(0)' onclick=\"openImage('"
+										+ roadmap.ID
+										+ "','"
+										+ mainFeatureURL
+										+ "','Main Feature','"
+										+ roadmap.mainFeatureImage
+										+ "');\">"
 										+ "<img width=130 height=130 title='Main Feature' src='"
-			+ roadmap.mainFeatureImage + "=s150' /></a>";
+	+ roadmap.mainFeatureImage + "=s150' /></a>";
 							}
 							company += mainFeaturePic + "<br/>";
 
@@ -77,9 +90,15 @@ var companyname = '<%=request.getParameter("companyname")%>';
 								if (personaURL == 'null' || personaURL == "") {
 									personaURL = roadmap.personaImage;
 								}
-								personaPic = "<a href='"+personaURL+"' target=_blank>"
-										+ "<img width=130 height=130 title='Persona' src='"
-			+ roadmap.personaImage + "=s150' /></a>";
+								personaPic = "<a href='javascript:void(0)' onclick=\"openImage('"
+										+ roadmap.ID
+										+ "','"
+										+ personaURL
+										+ "','Persona Map','"
+										+ roadmap.personaImage
+										+ "');\">"
+										+ "<img width=130 height=130 title='Persona Map' src='"
++ roadmap.personaImage + "=s150' /></a>";
 							}
 							company += personaPic;
 
@@ -92,9 +111,15 @@ var companyname = '<%=request.getParameter("companyname")%>';
 										|| salescopyURL == "") {
 									salescopyURL = roadmap.salescopyImage;
 								}
-								salescopyPic = "<a href='"+salescopyURL+"' target=_blank>"
+								salescopyPic = "<a href='javascript:void(0)' onclick=\"openImage('"
+										+ roadmap.ID
+										+ "','"
+										+ salescopyURL
+										+ "','Copywriting','"
+										+ roadmap.salescopyImage
+										+ "');\">"
 										+ "<img width=130 height=130 title='Copywriting' src='"
-			+ roadmap.salescopyImage + "=s150' /></a>";
++ roadmap.salescopyImage + "=s150' /></a>";
 							}
 							company += salescopyPic;
 
@@ -119,6 +144,15 @@ var companyname = '<%=request.getParameter("companyname")%>';
 
 		$("#main").load("../pages/accelerometer.jsp",
 				"companyname=" + companyname);
+	}
+
+	function openImage(companyname, imageURL, imageTitle, imageSource) {
+
+		$("#main").load(
+				"../pages/image.jsp",
+				"companyname=" + companyname + "&imageURL=" + imageURL
+						+ "&imageTitle=" + imageTitle + "&imageSource="
+						+ imageSource);
 	}
 </script>
 

@@ -4,9 +4,9 @@
 	<label for="commentName">Your Name:</label> <input type=text
 		name="commentName" id="commentName" placeholder="Enter your name here"
 		value="" class="ui-corner-all" /><br /> <label for="commentText">Your
-		Comment:</label>
+		Feedback:</label>
 	<textarea name="commentText" id="commentText"
-		placeholder="Enter your comments here" value="" rows=2
+		placeholder="Enter your comments here" value="" rows=3 cols=50
 		class="ui-corner-all"></textarea>
 	<button class='ui-btn ui-btn-inline ui-btn-b ui-mini' id='buttonSend'
 		onclick='saveComment();'>Send</button>
@@ -23,7 +23,11 @@
 		'screenName' : 'Comments'
 	});
 
-
+	var yourName = getUrlParameter("Name");
+	if (yourName !="" && yourName !="undefined") {
+		$("#commentName").val(yourName);
+	}
+	
 	var companyname = '<%=request.getParameter("companyname")%>';
 
 	function listComments() {
@@ -35,11 +39,14 @@
 			var results = jQuery.parseJSON(data);
 
 			var commentList = '';
-			$.each(results, function(key, val) {
+			$.each(results,
+					function(key, val) {
 
-				commentList += '<label>' + val.commentname + ': ' + val.text
-						+ '</label><br/>';
-			});
+						commentList += '<font size=1><label>['
+								+ timestampToDate(val.timestamp) + '] <b>'
+								+ val.commentname + '</b>: ' + val.text
+								+ '</label></font>';
+					});
 
 			$("#commentsSession").html(commentList);
 		});
@@ -54,6 +61,7 @@
 		$.post(saveUrl, {}, function(data, status) {
 
 			listComments();
+			$("#commentText").val("");
 
 		});
 	}

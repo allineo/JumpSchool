@@ -4,8 +4,11 @@
 	<div id="companyName"></div>
 
 	<div id="Maturity3"></div>
-	<br /> <br />
+	<br /><hr /><br />
 	<div id="Maturity2"></div>
+		<br /><hr /><br />
+	<div id="Maturity1"></div>
+	
 </div>
 
 <script>
@@ -16,9 +19,9 @@
 		+" onclick='window.location.href =\"../pages/getname.html\";'>"
 							+ "Add Your Company</button><br/>");
 
-	function getWall() {
+	function getWall(maturityNumber) {
 
-		var getWallUrl = "../wall";
+		var getWallUrl = "../wall?maturity=" + maturityNumber;
 
 		$
 				.post(
@@ -28,11 +31,9 @@
 
 							var results = jQuery.parseJSON(data);
 
-							var maturity3 = "<table><tr>";
-							var maturity2 = "<table><tr>";
+							var maturity = "<table><tr>";
 
-							var countMat3 = 0;
-							var countMat2 = 0;
+							var countMat = 0;
 							$
 									.each(
 											results,
@@ -41,44 +42,89 @@
 												var bmcanvasPic = "";
 												if (val.bmcanvasImage != null
 														&& val.bmcanvasImage != "") {
-
+													bmcanvasURL = val.bmcanvas;
+													if (bmcanvasURL == 'null'
+															|| bmcanvasURL == ""
+															|| bmcanvasURL == "undefined") {
+														bmcanvasURL = val.bmcanvasImage;
+													}
 													bmcanvasPic = "<img width=55 height=55 src='"
-														+ val.bmcanvasImage
-														+ "=s70' />";
+															+ val.bmcanvasImage
+															+ "=s70' title='Business Model Canvas' onclick=\"openImage('"
+															+ val.ID
+															+ "','"
+															+ bmcanvasURL
+															+ "','Business Model Canvas','"
+															+ val.bmcanvasImage
+															+ "')\"/>";
 												}
 
 												var mainFeaturePic = "";
 												if (val.mainFeatureImage != null
 														&& val.mainFeatureImage != "") {
+													mainFeatureURL = val.mainFeature;
+													if (mainFeatureURL == 'null'
+															|| mainFeatureURL == ""
+															|| mainFeatureURL == "undefined") {
 
+														mainFeatureURL = val.mainFeatureImage;
+													}
 													mainFeaturePic = "<img width=55 height=55 src='"
-														+ val.mainFeatureImage
-														+ "=s70' />";
+															+ val.mainFeatureImage
+															+ "=s70' title='Main Feature' onclick=\"openImage('"
+															+ val.ID
+															+ "','"
+															+ mainFeatureURL
+															+ "','Main Feature','"
+															+ val.mainFeatureImage
+															+ "')\"/>";
 												}
 
 												var personaPic = "";
 												if (val.personaImage != null
 														&& val.personaImage != "") {
-
+													personaURL = val.persona;
+													if (personaURL == 'null'
+															|| personaURL == ""
+															|| personaURL == "undefined") {
+														personaURL = val.personaImage;
+													}
 													personaPic = "<img width=55 height=55 src='"
-														+ val.personaImage
-														+ "=s70' />";
+															+ val.personaImage
+															+ "=s70' title='Persona Map' onclick=\"openImage('"
+															+ val.ID
+															+ "','"
+															+ personaURL
+															+ "','Persona Map','"
+															+ val.personaImage
+															+ "')\"/>";
 												}
 
 												var salescopyPic = "";
 												if (val.salescopyImage != null
 														&& val.salescopyImage != "") {
-
+													salescopyURL = val.salescopy;
+													if (salescopyURL == 'null'
+															|| salescopyURL == ""
+															|| salescopyURL == "undefined") {
+														salescopyURL = val.salescopyImage;
+													}
 													salescopyPic = "<img width=55 height=55 src='"
-														+ val.salescopyImage
-														+ "=s70' />";
+															+ val.salescopyImage
+															+ "=s70' title='Copywriting' onclick=\"openImage('"
+															+ val.ID
+															+ "','"
+															+ bmcanvasURL
+															+ "','Copywriting','"
+															+ val.salescopyImage
+															+ "')\"/>";
 
 												}
 
-												var company = "<td width=130 valign=top onclick=\"loadCompany('"
+												var company = "<td width=130 valign=top  >"
+														+ "<a href='#' onclick=\"loadCompany('"
 														+ val.ID
-														+ "')\" >"
-														+ "<a href='#'>"
+														+ "')\">"
 														+ val.ID
 														+ "</a><br/>"
 														+ bmcanvasPic
@@ -90,36 +136,39 @@
 
 												company += "<br/><br/></td>"
 
-												if (val.maturity >= '3') {
+									
 
-													maturity3 += company;
-													countMat3++;
-													if (countMat3 % 2 == 0) {
-														maturity3 += "<tr></tr>";
+													maturity += company;
+													countMat++;
+													if (countMat % 2 == 0) {
+														maturity += "<tr></tr>";
 													}
-												} else if (val.maturity == '2') {
-
-													maturity2 += company;
-													countMat2++;
-													if (countMat2 % 2 == 0) {
-														maturity2 += "<tr></tr>";
-													}
-												}
+											
 
 											});
 
-							maturity3 += "</tr></table>";
-							maturity2 += "</tr></table>";
+							maturity += "</tr></table>";
 
-							$("#Maturity3").html(maturity3);
-							$("#Maturity2").html(maturity2);
+							$("#Maturity" + maturityNumber).html(maturity);
+
 						});
 	}
-	getWall();
+	getWall(3);
+	getWall(2);
+	getWall(1);
 
 	function loadCompany(companyname) {
 
 		$("#wall").load("../pages/company.jsp", "companyname=" + companyname);
+	}
+
+	function openImage(companyname, imageURL, imageTitle, imageSource) {
+
+		$("#wall").load(
+				"../pages/image.jsp",
+				"companyname=" + companyname + "&imageURL=" + imageURL
+						+ "&imageTitle=" + imageTitle + "&imageSource="
+						+ imageSource);
 	}
 </script>
 

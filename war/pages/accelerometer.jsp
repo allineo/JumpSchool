@@ -523,8 +523,5 @@
 		});
 	}
 
-	if (getUrlParameter('Name') != null && getUrlParameter('Name') != '') {
-
-		getMetrics();
-	}
+	getMetrics();
 </script>

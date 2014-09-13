@@ -15,7 +15,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 @SuppressWarnings("serial")
-public class SaveCommentServlet extends HttpServlet {
+public class CreateRoadmapServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -46,17 +46,28 @@ public class SaveCommentServlet extends HttpServlet {
 
 	private String saveData(HttpServletRequest request) {
 
-		Entity entity = new Entity("comments");
-
-		entity.setProperty("timestamp", System.currentTimeMillis() + "");
-		entity.setProperty("companyname",
+		Key key = KeyFactory.createKey("metrics",
 				URLUtilities.decode(request.getParameter("name")));
-		entity.setProperty("commentname",
-				URLUtilities.decode(request.getParameter("commentname")));
-		entity.setProperty("text",
-				URLUtilities.decode(request.getParameter("text")));
+		Entity entity = Operations.get(key);
 
-		return Operations.save(entity);
+		if (entity.getProperty("didntStart") == null) {
+			entity.setProperty("didntStart", "true");
+
+			Operations.save(entity);
+		}
+
+		key = KeyFactory.createKey("roadmap",
+				URLUtilities.decode(request.getParameter("name")));
+
+		entity = Operations.get(key);
+
+		if (entity.getProperty("maturity") == null) {
+			entity.setProperty("maturity","1");
+			
+			Operations.save(entity);
+		}
+
+		return "";
 	}
 
 }

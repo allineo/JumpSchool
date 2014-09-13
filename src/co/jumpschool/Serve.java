@@ -18,6 +18,27 @@ public class Serve extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
+
+		/*
+		 * if (req.getParameter("thumbnail") != null) {
+		 * 
+		 * ImagesService imagesService = ImagesServiceFactory
+		 * .getImagesService();
+		 * 
+		 * String test = imagesService.getServingUrl(blobKey,10,false);
+		 * 
+		 * Image oldImage = ImagesServiceFactory.makeImageFromBlob(blobKey); /*
+		 * Transform resize = ImagesServiceFactory.makeResize(50, 50);
+		 * 
+		 * Image newImage = imagesService.applyTransform(resize, oldImage);
+		 * 
+		 * newImage.
+		 * 
+		 * new BlobstoreInputStream(blobkey);
+		 * 
+		 * blobKey = newImage.getBlobKey(); }
+		 */
+
 		blobstoreService.serve(blobKey, resp);
 	}
 }

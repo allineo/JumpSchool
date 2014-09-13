@@ -18,6 +18,8 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
 
 @SuppressWarnings("serial")
 public class FileUploadServlet extends HttpServlet {
@@ -40,8 +42,14 @@ public class FileUploadServlet extends HttpServlet {
 
 			Entity entity = Operations.get(key);
 
-			entity.setProperty(request.getParameter("fieldName"),
+			ImagesService imagesService = ImagesServiceFactory
+					.getImagesService();
+
+			entity.setProperty(request.getParameter("fieldName") + "BlobKey",
 					blobKey.getKeyString());
+
+			entity.setProperty(request.getParameter("fieldName"),
+					imagesService.getServingUrl(blobKey));
 
 			Operations.save(entity);
 		}

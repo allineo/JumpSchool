@@ -41,6 +41,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/savemetrics</url-pattern>
 	</servlet-mapping>
     
+	<servlet>
+		<servlet-name>createroadmap</servlet-name>
+		<servlet-class>co.jumpschool.CreateRoadmapServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createroadmap</servlet-name>
+		<url-pattern>/createroadmap</url-pattern>
+	</servlet-mapping>
     
     <servlet>
 		<servlet-name>getroadmap</servlet-name>
@@ -58,6 +66,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>saveroadmap</servlet-name>
 		<url-pattern>/saveroadmap</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>listcomments</servlet-name>
+		<servlet-class>co.jumpschool.ListCommentsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>listcomments</servlet-name>
+		<url-pattern>/listcomments</url-pattern>
+	</servlet-mapping>
+    
+    <servlet>
+		<servlet-name>savecomment</servlet-name>
+		<servlet-class>co.jumpschool.SaveCommentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>savecomment</servlet-name>
+		<url-pattern>/savecomment</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

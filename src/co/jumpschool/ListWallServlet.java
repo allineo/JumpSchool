@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.jumpschool.utilities.CallbackUtilities;
 import co.jumpschool.utilities.Operations;
+import co.jumpschool.utilities.URLUtilities;
 
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
@@ -35,7 +36,8 @@ public class ListWallServlet extends HttpServlet {
 
 		// if (JsonpfyProperties.authenticate(request)) {
 
-		JSONArray entities = listData();
+		JSONArray entities = listData(URLUtilities.decode(request
+				.getParameter("maturity")));
 
 		answer = CallbackUtilities.getCallback(
 				request.getParameter("callback"), entities.toString());
@@ -45,12 +47,18 @@ public class ListWallServlet extends HttpServlet {
 		return answer;
 	}
 
-	private JSONArray listData() {
+	private JSONArray listData(String maturity) {
 
 		Query query = new Query("roadmap");
 
-		query.setFilter(new FilterPredicate("maturity",
-				FilterOperator.GREATER_THAN_OR_EQUAL, "2"));
+		if (maturity == "3") {
+			query.setFilter(new FilterPredicate("maturity",
+					FilterOperator.GREATER_THAN_OR_EQUAL, maturity));
+		} else {
+			query.setFilter(new FilterPredicate("maturity",
+					FilterOperator.EQUAL, maturity));
+		}
+
 		return Operations.jsonQuery(query);
 	}
 
